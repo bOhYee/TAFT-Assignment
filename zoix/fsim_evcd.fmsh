@@ -1,0 +1,22 @@
+# Enable Fault Manager Verbosity 
+set(var=[resources], messages=[all])
+# Enhanced Synopsys Format 
+set(var=[defines], format=[standard])
+# Import Fault List 
+set(var=[fdef], method=[fr], fr.fr=[$FAULT_LIST],abort=[error])
+# Disable Hyperfaults 
+set(var=[fsim],hyperfault=[0])
+
+
+design()
+
+addtst(test=[sbst], 
+stimtype=[vcd],
+stim=[$VCD],
+dut.stim=[cv32e40p_top, tb_top.wrapper_i.top_i], 
+stim_options=[+TESTNAME=sbst])
+
+fsim()
+
+coverage(file=[$FAULT_LIST.fsim])
+coverage(file=[$FAULT_LIST.hier], hierarchical=[0],faultlimit=[100])

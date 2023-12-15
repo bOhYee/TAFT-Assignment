@@ -1,0 +1,40 @@
+# Ignore all run directories
+run/*
+
+# Ignore synthesis directory
+syn/*
+
+# Ignore all backup directories and files
+bak/
+*.bak
+
+# Ignore gsf csv file 
+gate/*.csv
+gate/*.gsf
+
+# Ignore all cross-compiled products
+sbst/*.elf
+sbst/*.map
+sbst/*.hex
+
+# Original .gitignore
+TAGS
+*.swp
+*~
+*.o
+*.log
+*.vcd
+*.xml
+*.dbg
+*.wlf
+*.elf
+*.hex
+*.map
+*.out
+*.json
+.build-rtl
+.lib-rtl
+.opt-rtl
+/build
+/Bender.lock
+/Bender.local
