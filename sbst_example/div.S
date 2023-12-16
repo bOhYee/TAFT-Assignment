@@ -1,0 +1,153 @@
+	li x12,0xffffffff
+	li x13,0x55555555
+	div x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0xaaaaaaaa
+	div x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0x22222222
+	div x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0x6f6f6f6f
+	div x14,x13,x12
+	sw x14,5(sp)
+ 	li x12,0xffffffff
+	li x13,0x55555555
+	divu x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0xaaaaaaaa
+	divu x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0x22222222
+	divu x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0x6f6f6f6f
+	divu x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0x7fff7fff
+	rem x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0x6f6f6f6f
+	div x14,x13,x12
+	sw x14,5(sp)
+	li x12,4011234151
+	li x13,185504057
+	rem x14,x12,x13
+	sw x14,5(sp)
+	li x12,0x00000000
+	li x13,0x11111111
+	rem x14,x13,x12
+	sw x14,5(sp)
+	li x12,0x00000000
+	li x13,0xffffffff
+	rem x14,x13,x12
+	sw x14,5(sp)
+	li x12,0x00000000
+	li x13,0xffffffff
+	remu x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0x7fff7fff
+	remu x14,x13,x12
+	sw x14,5(sp)
+	li x12,0xffffffff
+	li x13,0x6f6f6f6f
+	div x14,x13,x12
+	sw x14,5(sp)
+	li x12,4011234151
+	li x13,185504057
+	remu x14,x12,x13
+	sw x14,5(sp)
+li x12,1250257048
+li x13,3561573652
+li x14,2430766216
+li x15,4122529820
+div x16,x13,x12
+remu x17,x15,x14
+sw x17,5(sp)
+li x12,1516742255
+li x13,1181161141
+li x14,1297153126
+li x15,2610167748
+rem x16,x13,x12
+div x17,x15,x14
+sw x17,5(sp)
+li x12,1516742255
+li x13,1181161141
+li x14,1297153126
+li x15,2610167748
+rem x16,x13,x12
+div x17,x15,x14
+sw x17,5(sp)
+li x12,3355071078
+li x13,3698369225
+li x14,3975982124
+li x15,3236506588
+divu x16,x13,x12
+rem x17,x15,x14
+sw x17,5(sp)
+li x12,155717882
+li x13,2426869500
+li x14,22187168
+li x15,2060357082
+remu x16,x13,x12
+divu x17,x15,x14
+sw x17,5(sp)
+li x12,637395508
+li x13,2591431417
+li x14,1230079319
+li x15,2178287630
+div x16,x13,x12
+remu x17,x15,x14
+sw x17,5(sp)
+li x12,3269950736
+li x13,3777634816
+li x14,11132058
+li x15,2462843463
+rem x16,x13,x12
+divu x17,x15,x14
+sw x17,5(sp)
+li x12,158361
+li x13,262440102
+li x14,11678
+li x15,1460264824
+divu x16,x13,x12
+divu x17,x15,x14
+sw x17,5(sp)
+li x12,371936
+li x13,620520333
+li x14,178234
+li x15,2547290706
+div x16,x13,x12
+remu x17,x15,x14
+sw x17,5(sp)
+li x12,323294
+li x13,2392224096
+li x14,48456
+li x15,565889718
+divu x16,x13,x12
+remu x17,x15,x14
+sw x17,5(sp)
+li x12,12216
+li x13,3173599647
+li x14,323443
+li x15,3547193501
+rem x16,x13,x12
+divu x17,x15,x14
+sw x17,5(sp)
+li x12,219731
+li x13,1348831327
+li x14,179013
+li x15,1243044913
+divu x16,x13,x12
+remu x17,x15,x14
+sw x17,5(sp)
+
