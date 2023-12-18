@@ -82,7 +82,7 @@ link
 uniquify
 check_design 
 
-read_sdc $ROOT_PATH/constraints/cv32e40p_core.sdc
+source $ROOT_PATH/constraints/cv32e40p_core.sdc
 
 set_operating_conditions $OPER_COND
 
