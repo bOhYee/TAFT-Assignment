@@ -29,6 +29,8 @@
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 
+//typedef logic [31:0] alu_result_type [2:0];
+
 module cv32e40p_ex_stage
   import cv32e40p_pkg::*;
   import cv32e40p_apu_core_pkg::*;
@@ -161,7 +163,19 @@ module cv32e40p_ex_stage
 
     output logic ex_ready_o,  // EX stage ready for new data
     output logic ex_valid_o,  // EX stage gets new data
-    input  logic wb_ready_i  // WB stage ready for new data
+    input  logic wb_ready_i,  // WB stage ready for new data
+//    output alu_result_type alu_result_zoix,
+//    output logic alu_cmp_result_zoix [2:0],
+//    output logic alu_ready_zoix [2:0],
+    output logic [31:0] alu_result_zoix1, 
+    output logic [31:0] alu_result_zoix2,  
+    output logic [31:0] alu_result_zoix3,  
+    output logic        alu_cmp_result_zoix1,
+    output logic        alu_cmp_result_zoix2,
+    output logic        alu_cmp_result_zoix3,
+    output logic        alu_ready_zoix1,
+    output logic        alu_ready_zoix2,
+    output logic        alu_ready_zoix3
 );
 
   logic [                31:0] alu_result;
@@ -260,31 +274,72 @@ module cv32e40p_ex_stage
   //                        //
   ////////////////////////////
 
-  cv32e40p_alu alu_i (
-      .clk        (clk),
-      .rst_n      (rst_n),
-      .enable_i   (alu_en_i),
-      .operator_i (alu_operator_i),
-      .operand_a_i(alu_operand_a_i),
-      .operand_b_i(alu_operand_b_i),
-      .operand_c_i(alu_operand_c_i),
+  logic [31:0] alu_result_tmp [2:0];
+  logic alu_cmp_result_tmp [2:0];
+  logic alu_ready_tmp [2:0];
 
-      .vector_mode_i(alu_vec_mode_i),
-      .bmask_a_i    (bmask_a_i),
-      .bmask_b_i    (bmask_b_i),
-      .imm_vec_ext_i(imm_vec_ext_i),
+  genvar i;
+    generate
+        for (i=0; i < 2; i++) begin
+            cv32e40p_alu alu_i (
+              .clk        (clk),
+              .rst_n      (rst_n),
+              .enable_i   (alu_en_i),
+              .operator_i (alu_operator_i),
+              .operand_a_i(alu_operand_a_i),
+              .operand_b_i(alu_operand_b_i),
+              .operand_c_i(alu_operand_c_i),
+              .vector_mode_i(alu_vec_mode_i),
+              .bmask_a_i    (bmask_a_i),
+              .bmask_b_i    (bmask_b_i),
+              .imm_vec_ext_i(imm_vec_ext_i),
+              .is_clpx_i   (alu_is_clpx_i),
+              .clpx_shift_i(alu_clpx_shift_i),
+              .is_subrot_i (alu_is_subrot_i),
+              .result_o           (alu_result_tmp[i]),
+              .comparison_result_o(alu_cmp_result_tmp[i]),
+              .ready_o   (alu_ready_tmp[i]),
+              .ex_ready_i(ex_ready_o)
+            ); 
+        end
+    endgenerate
 
-      .is_clpx_i   (alu_is_clpx_i),
-      .clpx_shift_i(alu_clpx_shift_i),
-      .is_subrot_i (alu_is_subrot_i),
+always_comb begin
+  if (alu_result_tmp[0] == alu_result_tmp[1] && alu_cmp_result_tmp[0] == alu_cmp_result_tmp[1] && alu_ready_tmp[0] == alu_ready_tmp[1]) begin
+    alu_result = alu_result_tmp[0];
+    alu_cmp_result = alu_cmp_result_tmp[0];
+    alu_ready = alu_ready_tmp[0];
+  end
+  else if (alu_result_tmp[0] == alu_result_tmp[2] && alu_cmp_result_tmp[0] == alu_cmp_result_tmp[2] && alu_ready_tmp[0] == alu_ready_tmp[2]) begin
+    alu_result = alu_result_tmp[0];
+    alu_cmp_result = alu_cmp_result_tmp[0];
+    alu_ready = alu_ready_tmp[0];
+  end
+  else if (alu_result_tmp[1] == alu_result_tmp[2] && alu_cmp_result_tmp[1] == alu_cmp_result_tmp[2] && alu_ready_tmp[1] == alu_ready_tmp[2]) begin
+    alu_result = alu_result_tmp[1];
+    alu_cmp_result = alu_cmp_result_tmp[1];
+    alu_ready = alu_ready_tmp[1];
+  end
+  else begin
+    alu_result = '0;
+    alu_cmp_result = 1'b0;
+    alu_ready = 1'b0;   
+  end
+end
 
-      .result_o           (alu_result),
-      .comparison_result_o(alu_cmp_result),
+  //assign alu_result_zoix      = alu_result_tmp;
+  //assign alu_cmp_result_zoix  = alu_cmp_result_tmp;
+  //assign alu_ready_zoix       = alu_ready_tmp;
 
-      .ready_o   (alu_ready),
-      .ex_ready_i(ex_ready_o)
-  );
-
+  assign alu_result_zoix1     = alu_result_tmp[0];
+  assign alu_result_zoix2     = alu_result_tmp[1];
+  assign alu_result_zoix3     = alu_result_tmp[2];
+  assign alu_cmp_result_zoix1 = alu_cmp_result_tmp[0];
+  assign alu_cmp_result_zoix2 = alu_cmp_result_tmp[1];
+  assign alu_cmp_result_zoix3 = alu_cmp_result_tmp[2];
+  assign alu_ready_zoix1      = alu_ready_tmp[0];
+  assign alu_ready_zoix2      = alu_ready_tmp[1];
+  assign alu_ready_zoix3      = alu_ready_tmp[2];
 
   ////////////////////////////////////////////////////////////////
   //  __  __ _   _ _   _____ ___ ____  _     ___ _____ ____     //
@@ -325,6 +380,7 @@ module cv32e40p_ex_stage
       .ready_o      (mult_ready),
       .ex_ready_i   (ex_ready_o)
   );
+
 
   generate
     if (FPU == 1) begin : gen_apu
