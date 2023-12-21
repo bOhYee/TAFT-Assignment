@@ -65,10 +65,18 @@ module cv32e40p_core
     output logic        data_req_o,
     input  logic        data_gnt_i,
     input  logic        data_rvalid_i,
+    
     output logic        data_we_o,
+    output logic data_we_o_tmp [2:0],
+
     output logic [ 3:0] data_be_o,
+    output logic [ 3:0] data_be_o_tmp [2:0],
+
     output logic [31:0] data_addr_o,
+    
     output logic [31:0] data_wdata_o,
+    output logic [31:0] data_wdata_o_tmp [2:0],
+
     input  logic [31:0] data_rdata_i,
 
     // apu-interconnect
@@ -132,6 +140,8 @@ module cv32e40p_core
   // these used to be former inputs/outputs of RI5CY
 
   logic [5:0] data_atop_o;  // atomic operation, only active if parameter `A_EXTENSION != 0`
+  logic [5:0] data_atop_o_tmp [2:0];
+
   logic       irq_sec_i;
   logic       sec_lvl_o;
 
@@ -164,6 +174,7 @@ module cv32e40p_core
 
   logic        useincr_addr_ex;  // Active when post increment
   logic        data_misaligned;
+  logic data_misaligned_tmp [2:0];
 
   logic        mult_multicycle;
 
@@ -176,6 +187,7 @@ module cv32e40p_core
   logic               ctrl_busy;
   logic               if_busy;
   logic               lsu_busy;
+  logic lsu_busy_tmp [2:0];
   logic               apu_busy;
 
   logic        [31:0] pc_ex;  // PC of last executed branch or cv.elw
@@ -279,9 +291,13 @@ module cv32e40p_core
   logic               data_misaligned_ex;
 
   logic               p_elw_start;  // Start of cv.elw load (when data_req_o is sent)
+  logic p_elw_start_tmp [2:0];
+
   logic               p_elw_finish;  // Finish of cv.elw load (when data_rvalid_i is received)
+  logic p_elw_finish_tmp [2:0];
 
   logic        [31:0] lsu_rdata;
+  logic [31:0] lsu_rdata_tmp [2:0];
 
   // stall control
   logic               halt_if;
@@ -293,7 +309,10 @@ module cv32e40p_core
   logic               wb_valid;
 
   logic               lsu_ready_ex;
+  logic lsu_ready_ex_tmp [2:0];
+
   logic               lsu_ready_wb;
+  logic lsu_ready_wb_tmp [2:0];
 
   logic               apu_ready_wb;
 
@@ -361,7 +380,11 @@ module cv32e40p_core
   logic [N_PMP_ENTRIES-1:0][ 7:0] pmp_cfg;
 
   logic                           data_req_pmp;
+  logic data_req_pmp_tmp [2:0];
+
   logic [             31:0]       data_addr_pmp;
+  logic [31:0] data_addr_pmp [2:0];
+
   logic                           data_gnt_pmp;
   logic                           data_err_pmp;
   logic                           data_err_ack;
@@ -908,53 +931,58 @@ module cv32e40p_core
   //                                                                                    //
   ////////////////////////////////////////////////////////////////////////////////////////
 
-  cv32e40p_load_store_unit #(
-      .PULP_OBI(PULP_OBI)
-  ) load_store_unit_i (
-      .clk  (clk),
-      .rst_n(rst_ni),
+  genvar i;
+  generate
+      for (i=0; i <= 2; i++) begin
+          cv32e40p_load_store_unit #(
+              .PULP_OBI(PULP_OBI)
+          ) load_store_unit_i (
+              .clk  (clk),
+              .rst_n(rst_ni),
 
-      //output to data memory
-      .data_req_o    (data_req_pmp),
-      .data_gnt_i    (data_gnt_pmp),
-      .data_rvalid_i (data_rvalid_i),
-      .data_err_i    (1'b0),  // Bus error (not used yet)
-      .data_err_pmp_i(data_err_pmp),  // PMP error
+              //output to data memory
+              .data_req_o    (data_req_pmp_tmp[i]),  // O 
+              .data_gnt_i    (data_gnt_pmp), 
+              .data_rvalid_i (data_rvalid_i),
+              .data_err_i    (1'b0),  // Bus error (not used yet)
+              .data_err_pmp_i(data_err_pmp),  // PMP error
 
-      .data_addr_o (data_addr_pmp),
-      .data_we_o   (data_we_o),
-      .data_atop_o (data_atop_o),
-      .data_be_o   (data_be_o),
-      .data_wdata_o(data_wdata_o),
-      .data_rdata_i(data_rdata_i),
+              .data_addr_o (data_addr_pmp_tmp[i]),   // O
+              .data_we_o   (data_we_o_tmp[i]),       // O
+              .data_atop_o (data_atop_o_tmp[i]),     // O
+              .data_be_o   (data_be_o_tmp[i]),       // O 
+              .data_wdata_o(data_wdata_o_tmp[i]),    // O
+              .data_rdata_i(data_rdata_i),
 
-      // signal from ex stage
-      .data_we_ex_i        (data_we_ex),
-      .data_atop_ex_i      (data_atop_ex),
-      .data_type_ex_i      (data_type_ex),
-      .data_wdata_ex_i     (alu_operand_c_ex),
-      .data_reg_offset_ex_i(data_reg_offset_ex),
-      .data_load_event_ex_i(data_load_event_ex),
-      .data_sign_ext_ex_i  (data_sign_ext_ex),  // sign extension
+              // signal from ex stage
+              .data_we_ex_i        (data_we_ex),
+              .data_atop_ex_i      (data_atop_ex),
+              .data_type_ex_i      (data_type_ex),
+              .data_wdata_ex_i     (alu_operand_c_ex),
+              .data_reg_offset_ex_i(data_reg_offset_ex),
+              .data_load_event_ex_i(data_load_event_ex),
+              .data_sign_ext_ex_i  (data_sign_ext_ex),  // sign extension
 
-      .data_rdata_ex_o  (lsu_rdata),
-      .data_req_ex_i    (data_req_ex),
-      .operand_a_ex_i   (alu_operand_a_ex),
-      .operand_b_ex_i   (alu_operand_b_ex),
-      .addr_useincr_ex_i(useincr_addr_ex),
+              .data_rdata_ex_o  (lsu_rdata_tmp[i]),  // O
+              .data_req_ex_i    (data_req_ex),
+              .operand_a_ex_i   (alu_operand_a_ex),
+              .operand_b_ex_i   (alu_operand_b_ex),
+              .addr_useincr_ex_i(useincr_addr_ex),
 
-      .data_misaligned_ex_i(data_misaligned_ex),  // from ID/EX pipeline
-      .data_misaligned_o   (data_misaligned),
+              .data_misaligned_ex_i(data_misaligned_ex),  // from ID/EX pipeline
+              .data_misaligned_o   (data_misaligned_tmp[i]), // O
 
-      .p_elw_start_o (p_elw_start),
-      .p_elw_finish_o(p_elw_finish),
+              .p_elw_start_o (p_elw_start_tmp[i]),   // O
+              .p_elw_finish_o(p_elw_finish_tmp[i]),  // O
 
-      // control signals
-      .lsu_ready_ex_o(lsu_ready_ex),
-      .lsu_ready_wb_o(lsu_ready_wb),
+              // control signals
+              .lsu_ready_ex_o(lsu_ready_ex_tmp[i]),  // O
+              .lsu_ready_wb_o(lsu_ready_wb_tmp[i]),  // O 
 
-      .busy_o(lsu_busy)
-  );
+              .busy_o(lsu_busy_tmp[i])               // O
+          );
+      end
+  endgenerate
 
   // Tracer signal
   assign wb_valid = lsu_ready_wb;
