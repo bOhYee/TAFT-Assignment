@@ -93,6 +93,7 @@ set uniquify_naming_style "%s_%d"
 uniquify -force
 
 #-gate_clock -no_boundary_optimization -timing
+#set_dont_touch core_i/pc_id
 compile_ultra -no_autoungroup 
 
 report_timing > ${LOG_PATH}/report_timing.log

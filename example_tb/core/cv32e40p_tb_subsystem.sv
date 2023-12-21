@@ -71,15 +71,15 @@ module cv32e40p_tb_subsystem #(
   //alu_result_type alu_result_zoix;
   //logic alu_cmp_result_zoix [2:0];
   //logic alu_ready_zoix [2:0];
-  logic [31:0] alu_result_zoix1; 
-  logic [31:0] alu_result_zoix2;  
-  logic [31:0] alu_result_zoix3;  
-  logic        alu_cmp_result_zoix1;
-  logic        alu_cmp_result_zoix2;
-  logic        alu_cmp_result_zoix3;
-  logic        alu_ready_zoix1;
-  logic        alu_ready_zoix2;
-  logic        alu_ready_zoix3;
+  //logic [31:0] alu_result_zoix1; 
+  //logic [31:0] alu_result_zoix2;  
+  //logic [31:0] alu_result_zoix3;  
+  //logic        alu_cmp_result_zoix1;
+  //logic        alu_cmp_result_zoix2;
+  //logic        alu_cmp_result_zoix3;
+  //logic        alu_ready_zoix1;
+  //logic        alu_ready_zoix2;
+  //logic        alu_ready_zoix3;
 
   assign debug_req_i = 1'b0;
 
@@ -130,19 +130,19 @@ module cv32e40p_tb_subsystem #(
       .debug_halted_o   (),
 
       .fetch_enable_i(fetch_enable_i),
-      .core_sleep_o  (core_sleep_o),
+      .core_sleep_o  (core_sleep_o)
       //.alu_result_zoix(alu_result_zoix),
       //.alu_cmp_result_zoix(alu_cmp_result_zoix),
       //.alu_ready_zoix(alu_ready_zoix),
-      .alu_result_zoix1(alu_result_zoix1),
-      .alu_result_zoix2(alu_result_zoix2),
-      .alu_result_zoix3(alu_result_zoix3),
-      .alu_cmp_result_zoix1(alu_cmp_result_zoix1),
-      .alu_cmp_result_zoix2(alu_cmp_result_zoix2),
-      .alu_cmp_result_zoix3(alu_cmp_result_zoix3),
-      .alu_ready_zoix1(alu_ready_zoix1),
-      .alu_ready_zoix2(alu_ready_zoix2),
-      .alu_ready_zoix3(alu_ready_zoix3)
+      //.alu_result_zoix1(alu_result_zoix1),
+      //.alu_result_zoix2(alu_result_zoix2),
+      //.alu_result_zoix3(alu_result_zoix3),
+      //.alu_cmp_result_zoix1(alu_cmp_result_zoix1),
+      //.alu_cmp_result_zoix2(alu_cmp_result_zoix2),
+      //.alu_cmp_result_zoix3(alu_cmp_result_zoix3),
+      //.alu_ready_zoix1(alu_ready_zoix1),
+      //.alu_ready_zoix2(alu_ready_zoix2),
+      //.alu_ready_zoix3(alu_ready_zoix3)
   );
 
 

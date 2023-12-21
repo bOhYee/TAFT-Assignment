@@ -66,19 +66,19 @@ module cv32e40p_top #(
 
     // CPU Control Signals
     input  logic fetch_enable_i,
-    output logic core_sleep_o,
+    output logic core_sleep_o
     //output alu_result_type alu_result_zoix,
     //output logic alu_cmp_result_zoix [2:0],
     //output logic alu_ready_zoix [2:0],
-    output logic [31:0] alu_result_zoix1, 
-    output logic [31:0] alu_result_zoix2,  
-    output logic [31:0] alu_result_zoix3,  
-    output logic        alu_cmp_result_zoix1,
-    output logic        alu_cmp_result_zoix2,
-    output logic        alu_cmp_result_zoix3,
-    output logic        alu_ready_zoix1,
-    output logic        alu_ready_zoix2,
-    output logic        alu_ready_zoix3
+    //output logic [31:0] alu_result_zoix1, 
+    //output logic [31:0] alu_result_zoix2,  
+    //output logic [31:0] alu_result_zoix3,  
+    //output logic        alu_cmp_result_zoix1,
+    //output logic        alu_cmp_result_zoix2,
+    //output logic        alu_cmp_result_zoix3,
+    //output logic        alu_ready_zoix1,
+    //output logic        alu_ready_zoix2,
+    //output logic        alu_ready_zoix3
 );
 
   import cv32e40p_apu_core_pkg::*;
@@ -152,19 +152,19 @@ module cv32e40p_top #(
       .debug_halted_o   (debug_halted_o),
 
       .fetch_enable_i(fetch_enable_i),
-      .core_sleep_o  (core_sleep_o),
+      .core_sleep_o  (core_sleep_o)
       //.alu_result_zoix(alu_result_zoix),
       //.alu_cmp_result_zoix(alu_cmp_result_zoix),
       //.alu_ready_zoix(alu_ready_zoix),
-      .alu_result_zoix1(alu_result_zoix1),
-      .alu_result_zoix2(alu_result_zoix2),
-      .alu_result_zoix3(alu_result_zoix3),
-      .alu_cmp_result_zoix1(alu_cmp_result_zoix1),
-      .alu_cmp_result_zoix2(alu_cmp_result_zoix2),
-      .alu_cmp_result_zoix3(alu_cmp_result_zoix3),
-      .alu_ready_zoix1(alu_ready_zoix1),
-      .alu_ready_zoix2(alu_ready_zoix2),
-      .alu_ready_zoix3(alu_ready_zoix3)
+      //.alu_result_zoix1(alu_result_zoix1),
+      //.alu_result_zoix2(alu_result_zoix2),
+      //.alu_result_zoix3(alu_result_zoix3),
+      //.alu_cmp_result_zoix1(alu_cmp_result_zoix1),
+      //.alu_cmp_result_zoix2(alu_cmp_result_zoix2),
+      //.alu_cmp_result_zoix3(alu_cmp_result_zoix3),
+      //.alu_ready_zoix1(alu_ready_zoix1),
+      //.alu_ready_zoix2(alu_ready_zoix2),
+      //.alu_ready_zoix3(alu_ready_zoix3)
   );
 
   generate
