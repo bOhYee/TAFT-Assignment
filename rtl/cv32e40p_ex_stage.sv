@@ -164,18 +164,6 @@ module cv32e40p_ex_stage
     output logic ex_ready_o,  // EX stage ready for new data
     output logic ex_valid_o,  // EX stage gets new data
     input  logic wb_ready_i  // WB stage ready for new data
-//    output alu_result_type alu_result_zoix,
-//    output logic alu_cmp_result_zoix [2:0],
-//    output logic alu_ready_zoix [2:0],
-//    output logic [31:0] alu_result_zoix1, 
-//    output logic [31:0] alu_result_zoix2,  
-//    output logic [31:0] alu_result_zoix3,  
-//    output logic        alu_cmp_result_zoix1,
-//    output logic        alu_cmp_result_zoix2,
-//    output logic        alu_cmp_result_zoix3,
-//    output logic        alu_ready_zoix1,
-//    output logic        alu_ready_zoix2,
-//    output logic        alu_ready_zoix3
 );
 
   logic [                31:0] alu_result;
@@ -327,19 +315,6 @@ always_comb begin
   end
 end
 
-  //assign alu_result_zoix      = alu_result_tmp;
-  //assign alu_cmp_result_zoix  = alu_cmp_result_tmp;
-  //assign alu_ready_zoix       = alu_ready_tmp;
-
-  //assign alu_result_zoix1     = alu_result_tmp[0];
-  //assign alu_result_zoix2     = alu_result_tmp[1];
-  //assign alu_result_zoix3     = alu_result_tmp[2];
-  //assign alu_cmp_result_zoix1 = alu_cmp_result_tmp[0];
-  //assign alu_cmp_result_zoix2 = alu_cmp_result_tmp[1];
-  //assign alu_cmp_result_zoix3 = alu_cmp_result_tmp[2];
-  //assign alu_ready_zoix1      = alu_ready_tmp[0];
-  //assign alu_ready_zoix2      = alu_ready_tmp[1];
-  //assign alu_ready_zoix3      = alu_ready_tmp[2];
 
   ////////////////////////////////////////////////////////////////
   //  __  __ _   _ _   _____ ___ ____  _     ___ _____ ____     //

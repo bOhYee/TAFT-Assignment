@@ -37,9 +37,6 @@ initial begin
                 $fs_strobe(`TOPLEVEL.data_addr_o);
                 $fs_strobe(`TOPLEVEL.data_wdata_o);
                 $fs_strobe(`TOPLEVEL.data_be_o);
-                //$fs_strobe(`TOPLEVEL.alu_result_zoix);
-                //$fs_strobe(`TOPLEVEL.alu_cmp_result_zoix);
-                //$fs_strobe(`TOPLEVEL.alu_ready_zoix);
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_0__alu_i.result_o);
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_1__alu_i.result_o);
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_2__alu_i.result_o);
@@ -49,14 +46,6 @@ initial begin
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_0__alu_i.ready_o);
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_1__alu_i.ready_o);
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_2__alu_i.ready_o);
-                //$fs_strobe(`TOPLEVEL.alu_result_zoix2);
-                //$fs_strobe(`TOPLEVEL.alu_result_zoix3);
-                //$fs_strobe(`TOPLEVEL.alu_cmp_result_zoix1);
-                //$fs_strobe(`TOPLEVEL.alu_cmp_result_zoix2);
-                //$fs_strobe(`TOPLEVEL.alu_cmp_result_zoix3);
-                //$fs_strobe(`TOPLEVEL.alu_ready_zoix1);
-                //$fs_strobe(`TOPLEVEL.alu_ready_zoix2);
-                //$fs_strobe(`TOPLEVEL.alu_ready_zoix3);
 
 
 

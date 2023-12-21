@@ -922,19 +922,19 @@ module cv32e40p_core
   ////////////////////////////////////////////////////////////////////////////////////////
 
 
-  logic data_req_pmp_tmp          [2:0];  
-  logic [31:0] data_addr_pmp_tmp  [2:0]; 
-  logic data_we_o_tmp             [2:0];
-  logic [5:0] data_atop_o_tmp     [2:0];
-  logic [3:0] data_be_o_tmp       [2:0];
-  logic [31:0] data_wdata_o_tmp   [2:0];
-  logic [31:0] lsu_rdata_tmp      [2:0];        
-  logic data_misaligned_tmp       [2:0];       
-  logic p_elw_start_tmp           [2:0];   
-  logic p_elw_finish_tmp          [2:0];    
-  logic lsu_ready_ex_tmp          [2:0];    
-  logic lsu_ready_wb_tmp          [2:0];    
-  logic lsu_busy_tmp              [2:0];
+  //logic data_req_pmp_tmp          [2:0];  
+  //logic [31:0] data_addr_pmp_tmp  [2:0]; 
+  //logic data_we_o_tmp             [2:0];
+  //logic [5:0] data_atop_o_tmp     [2:0];
+  //logic [3:0] data_be_o_tmp       [2:0];
+  //logic [31:0] data_wdata_o_tmp   [2:0];
+  //logic [31:0] lsu_rdata_tmp      [2:0];        
+  //logic data_misaligned_tmp       [2:0];       
+  //logic p_elw_start_tmp           [2:0];   
+  //logic p_elw_finish_tmp          [2:0];    
+  //logic lsu_ready_ex_tmp          [2:0];    
+  //logic lsu_ready_wb_tmp          [2:0];    
+  //logic lsu_busy_tmp              [2:0];
 
 
 //  genvar i;
@@ -1007,9 +1007,9 @@ module cv32e40p_core
 //    lsu_rdata     = lsu_rdata_tmp[1];  
 //  end
 //  else begin
-//    data_addr_pmp = data_addr_pmp_tmp[0];            
-//    data_wdata_o  = data_wdata_o_tmp[0];          
-//    lsu_rdata     = lsu_rdata_tmp[0];  
+//    data_addr_pmp = '0;            
+//    data_wdata_o  = '0;          
+//    lsu_rdata     = '0;  
 //  end
 //end
 
