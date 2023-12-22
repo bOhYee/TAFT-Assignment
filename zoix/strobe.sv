@@ -46,9 +46,6 @@ initial begin
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_0__alu_i.ready_o);
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_1__alu_i.ready_o);
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_2__alu_i.ready_o);
-                $fs_strobe(`TOPLEVEL.core_i.genblk1_0__load_store_unit_i.);
-                $fs_strobe(`TOPLEVEL.core_i.genblk1_0__load_store_unit_i.);
-                $fs_strobe(`TOPLEVEL.core_i.genblk1_0__load_store_unit_i.);
 
 
 

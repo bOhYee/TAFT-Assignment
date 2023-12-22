@@ -921,115 +921,53 @@ module cv32e40p_core
   //                                                                                    //
   ////////////////////////////////////////////////////////////////////////////////////////
 
+cv32e40p_load_store_unit #(
+      .PULP_OBI(PULP_OBI)
+  ) load_store_unit_i (
+      .clk  (clk),
+      .rst_n(rst_ni),
 
-  logic data_req_pmp_tmp          [2:0];  
-  logic [31:0] data_addr_pmp_tmp  [2:0]; 
-  logic data_we_o_tmp             [2:0];
-  logic [5:0] data_atop_o_tmp     [2:0];
-  logic [3:0] data_be_o_tmp       [2:0];
-  logic [31:0] data_wdata_o_tmp   [2:0];
-  logic [31:0] lsu_rdata_tmp      [2:0];        
-  logic data_misaligned_tmp       [2:0];       
-  logic p_elw_start_tmp           [2:0];   
-  logic p_elw_finish_tmp          [2:0];    
-  logic lsu_ready_ex_tmp          [2:0];    
-  logic lsu_ready_wb_tmp          [2:0];    
-  logic lsu_busy_tmp              [2:0];
+      //output to data memory
+      .data_req_o    (data_req_pmp),
+      .data_gnt_i    (data_gnt_pmp),
+      .data_rvalid_i (data_rvalid_i),
+      .data_err_i    (1'b0),  // Bus error (not used yet)
+      .data_err_pmp_i(data_err_pmp),  // PMP error
 
+      .data_addr_o (data_addr_pmp),
+      .data_we_o   (data_we_o),
+      .data_atop_o (data_atop_o),
+      .data_be_o   (data_be_o),
+      .data_wdata_o(data_wdata_o),
+      .data_rdata_i(data_rdata_i),
 
-  genvar i;
-  generate
-      for (i=0; i <= 2; i++) begin
-          cv32e40p_load_store_unit #(
-              .PULP_OBI(PULP_OBI)
-          ) load_store_unit_i (
-              .clk  (clk),
-              .rst_n(rst_ni),
-        
-              //output to data memory
-              .data_req_o    (data_req_pmp_tmp[i]),
-              .data_gnt_i    (data_gnt_pmp),
-              .data_rvalid_i (data_rvalid_i),
-              .data_err_i    (1'b0),  // Bus error (not used yet)
-              .data_err_pmp_i(data_err_pmp),  // PMP error
-        
-              .data_addr_o (data_addr_pmp_tmp[i]),
-              .data_we_o   (data_we_o_tmp[i]),
-              .data_atop_o (data_atop_o_tmp[i]),
-              .data_be_o   (data_be_o_tmp[i]),
-              .data_wdata_o(data_wdata_o_tmp[i]),
-              .data_rdata_i(data_rdata_i),
-        
-              // signal from ex stage
-              .data_we_ex_i        (data_we_ex),
-              .data_atop_ex_i      (data_atop_ex),
-              .data_type_ex_i      (data_type_ex),
-              .data_wdata_ex_i     (alu_operand_c_ex),
-              .data_reg_offset_ex_i(data_reg_offset_ex),
-              .data_load_event_ex_i(data_load_event_ex),
-              .data_sign_ext_ex_i  (data_sign_ext_ex),  // sign extension
-        
-              .data_rdata_ex_o  (lsu_rdata_tmp[i]),
-              .data_req_ex_i    (data_req_ex),
-              .operand_a_ex_i   (alu_operand_a_ex),
-              .operand_b_ex_i   (alu_operand_b_ex),
-              .addr_useincr_ex_i(useincr_addr_ex),
-        
-              .data_misaligned_ex_i(data_misaligned_ex),  // from ID/EX pipeline
-              .data_misaligned_o   (data_misaligned_tmp[i]),
-        
-              .p_elw_start_o (p_elw_start_tmp[i]),
-              .p_elw_finish_o(p_elw_finish_tmp[i]),
-        
-              // control signals
-              .lsu_ready_ex_o(lsu_ready_ex_tmp[i]),
-              .lsu_ready_wb_o(lsu_ready_wb_tmp[i]),
-        
-              .busy_o(lsu_busy_tmp[i])
-          );
-      end
-  endgenerate
+      // signal from ex stage
+      .data_we_ex_i        (data_we_ex),
+      .data_atop_ex_i      (data_atop_ex),
+      .data_type_ex_i      (data_type_ex),
+      .data_wdata_ex_i     (alu_operand_c_ex),
+      .data_reg_offset_ex_i(data_reg_offset_ex),
+      .data_load_event_ex_i(data_load_event_ex),
+      .data_sign_ext_ex_i  (data_sign_ext_ex),  // sign extension
 
-//always_comb begin
-//  if (data_addr_pmp_tmp[0] == data_addr_pmp_tmp[1] && data_wdata_o_tmp[0] == data_wdata_o_tmp[1] && lsu_rdata_tmp[0] == lsu_rdata_tmp[1]) begin
-//    data_addr_pmp = data_addr_pmp_tmp[0];            
-//    data_wdata_o  = data_wdata_o_tmp[0];          
-//    lsu_rdata     = lsu_rdata_tmp[0];      
-//  end
-//  else if (data_addr_pmp_tmp[0] == data_addr_pmp_tmp[2] && data_wdata_o_tmp[0] == data_wdata_o_tmp[2] && lsu_rdata_tmp[0] == lsu_rdata_tmp[2]) begin
-//    data_addr_pmp = data_addr_pmp_tmp[0];            
-//    data_wdata_o  = data_wdata_o_tmp[0];          
-//    lsu_rdata     = lsu_rdata_tmp[0];  
-//  end
-//  else if (data_addr_pmp_tmp[2] == data_addr_pmp_tmp[1] && data_wdata_o_tmp[2] == data_wdata_o_tmp[1] && lsu_rdata_tmp[2] == lsu_rdata_tmp[1]) begin
-//    data_addr_pmp = data_addr_pmp_tmp[1];            
-//    data_wdata_o  = data_wdata_o_tmp[1];          
-//    lsu_rdata     = lsu_rdata_tmp[1];  
-//  end
-//  else begin
-//    data_addr_pmp = data_addr_pmp_tmp[0];            
-//    data_wdata_o  = data_wdata_o_tmp[0];           
-//    lsu_rdata     = lsu_rdata_tmp[0];      
-//  end
-//end
+      .data_rdata_ex_o  (lsu_rdata),
+      .data_req_ex_i    (data_req_ex),
+      .operand_a_ex_i   (alu_operand_a_ex),
+      .operand_b_ex_i   (alu_operand_b_ex),
+      .addr_useincr_ex_i(useincr_addr_ex),
 
-  assign  data_addr_pmp = data_addr_pmp_tmp[0];            
-  assign  data_wdata_o  = data_wdata_o_tmp[0];           
-  assign  lsu_rdata     = lsu_rdata_tmp[0]; 
+      .data_misaligned_ex_i(data_misaligned_ex),  // from ID/EX pipeline
+      .data_misaligned_o   (data_misaligned),
 
+      .p_elw_start_o (p_elw_start),
+      .p_elw_finish_o(p_elw_finish),
 
+      // control signals
+      .lsu_ready_ex_o(lsu_ready_ex),
+      .lsu_ready_wb_o(lsu_ready_wb),
 
-  assign data_req_pmp    = data_req_pmp_tmp[0]    ;    
-  assign data_we_o       = data_we_o_tmp[0]       ;    
-  assign data_atop_o     = data_atop_o_tmp[0]     ;
-  assign data_be_o       = data_be_o_tmp[0]       ;
-  assign data_misaligned = data_misaligned_tmp[0] ;    
-  assign p_elw_start     = p_elw_start_tmp[0]     ;    
-  assign p_elw_finish    = p_elw_finish_tmp[0]    ;    
-  assign lsu_ready_ex    = lsu_ready_ex_tmp[0]    ;    
-  assign lsu_ready_wb    = lsu_ready_wb_tmp[0]    ;    
-  assign lsu_busy        = lsu_busy_tmp[0]        ;    
-
+      .busy_o(lsu_busy)
+  );
 
   // Tracer signal
   assign wb_valid = lsu_ready_wb;
