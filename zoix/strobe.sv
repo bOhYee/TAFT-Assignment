@@ -8,7 +8,6 @@
 
 module strobe;
 
-
 // Inject faults
 initial begin
 
