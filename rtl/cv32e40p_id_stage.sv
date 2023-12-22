@@ -928,12 +928,12 @@ module cv32e40p_id_stage
   //                                                     //
   /////////////////////////////////////////////////////////
 
-  cv32e40p_register_file #(
+  cv32e40p_register_file_ft #(
       .ADDR_WIDTH(6),
       .DATA_WIDTH(32),
       .FPU       (FPU),
       .ZFINX     (ZFINX)
-  ) register_file_i (
+  ) register_file_i_ft (
       .clk  (clk),
       .rst_n(rst_n),
 

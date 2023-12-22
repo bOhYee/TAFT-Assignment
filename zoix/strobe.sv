@@ -45,7 +45,10 @@ initial begin
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_0__alu_i.ready_o);
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_1__alu_i.ready_o);
                 $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.genblk1_2__alu_i.ready_o);
-
+                $fs_strobe(`TOPLEVEL.core_i.id_stage_i.register_file_i_ft.register_file_i_ff.rdata_a_o);
+                $fs_strobe(`TOPLEVEL.core_i.id_stage_i.register_file_i_ft.register_file_i_ff.rdata_b_o);
+                $fs_strobe(`TOPLEVEL.core_i.id_stage_i.register_file_i_ft.register_file_i_ff.rdata_c_o);
+               
 
 
                 #10000; // TMAX Strobe period

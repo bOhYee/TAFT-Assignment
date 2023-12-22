@@ -27,7 +27,10 @@ analyze -format sverilog -work work ${DESIGN_RTL_DIR}/include/cv32e40p_fpu_pkg.s
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/include/cv32e40p_pkg.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_if_stage.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_cs_registers.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_decoder.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_encoder.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_ff.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_load_store_unit.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_id_stage.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_aligner.sv
@@ -97,6 +100,7 @@ uniquify -force
 compile_ultra -no_autoungroup 
 
 report_timing > ${LOG_PATH}/report_timing.log
+report_area -hierarchy > ${LOG_PATH}/report_area_hier.log
 change_names -hierarchy -rules verilog
 write -hierarchy -format verilog -output "${GATE_PATH}/${TOPLEVEL}.v"
 write -hierarchy -format ddc     -output "${GATE_PATH}/${TOPLEVEL}.ddc"
