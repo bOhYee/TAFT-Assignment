@@ -34,7 +34,9 @@ analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_ft.
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_load_store_unit.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_id_stage.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_aligner.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_voter.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_decoder.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_decoder_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_compressed_decoder.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_fifo.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_prefetch_buffer.sv

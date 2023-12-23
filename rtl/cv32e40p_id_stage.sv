@@ -972,7 +972,7 @@ module cv32e40p_id_stage
   //                                           //
   ///////////////////////////////////////////////
 
-  cv32e40p_decoder #(
+  cv32e40p_decoder_ft #(
       .COREV_PULP      (COREV_PULP),
       .COREV_CLUSTER   (COREV_CLUSTER),
       .A_EXTENSION     (A_EXTENSION),
