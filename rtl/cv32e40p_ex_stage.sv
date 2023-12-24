@@ -262,14 +262,14 @@ module cv32e40p_ex_stage
   //                        //
   ////////////////////////////
 
-  logic [31:0] alu_result_tmp [2:0];
-  logic alu_cmp_result_tmp [2:0];
-  logic alu_ready_tmp [2:0];
+  //logic [31:0] alu_result_tmp [2:0];
+  //logic alu_cmp_result_tmp [2:0];
+  //logic alu_ready_tmp [2:0];
 
-  genvar i;
-    generate
-        for (i=0; i < 3; i++) begin
-            cv32e40p_alu alu_i (
+  //genvar i;
+  //  generate
+  //      for (i=0; i < 3; i++) begin
+            cv32e40p_alu_ft alu_i_ft (
               .clk        (clk),
               .rst_n      (rst_n),
               .enable_i   (alu_en_i),
@@ -284,36 +284,36 @@ module cv32e40p_ex_stage
               .is_clpx_i   (alu_is_clpx_i),
               .clpx_shift_i(alu_clpx_shift_i),
               .is_subrot_i (alu_is_subrot_i),
-              .result_o           (alu_result_tmp[i]),
-              .comparison_result_o(alu_cmp_result_tmp[i]),
-              .ready_o   (alu_ready_tmp[i]),
+              .result_o           (alu_result),
+              .comparison_result_o(alu_cmp_result),
+              .ready_o   (alu_ready),
               .ex_ready_i(ex_ready_o)
             ); 
-        end
-    endgenerate
+    //    end
+    //endgenerate
 
-always_comb begin
-  if (alu_result_tmp[0] == alu_result_tmp[1] && alu_cmp_result_tmp[0] == alu_cmp_result_tmp[1] && alu_ready_tmp[0] == alu_ready_tmp[1]) begin
-    alu_result = alu_result_tmp[0];
-    alu_cmp_result = alu_cmp_result_tmp[0];
-    alu_ready = alu_ready_tmp[0];
-  end
-  else if (alu_result_tmp[0] == alu_result_tmp[2] && alu_cmp_result_tmp[0] == alu_cmp_result_tmp[2] && alu_ready_tmp[0] == alu_ready_tmp[2]) begin
-    alu_result = alu_result_tmp[0];
-    alu_cmp_result = alu_cmp_result_tmp[0];
-    alu_ready = alu_ready_tmp[0];
-  end
-  else if (alu_result_tmp[1] == alu_result_tmp[2] && alu_cmp_result_tmp[1] == alu_cmp_result_tmp[2] && alu_ready_tmp[1] == alu_ready_tmp[2]) begin
-    alu_result = alu_result_tmp[1];
-    alu_cmp_result = alu_cmp_result_tmp[1];
-    alu_ready = alu_ready_tmp[1];
-  end
-  else begin
-    alu_result = '0;
-    alu_cmp_result = 1'b0;
-    alu_ready = 1'b0;   
-  end
-end
+//always_comb begin
+//  if (alu_result_tmp[0] == alu_result_tmp[1] && alu_cmp_result_tmp[0] == alu_cmp_result_tmp[1] && alu_ready_tmp[0] == alu_ready_tmp[1]) begin
+//    alu_result = alu_result_tmp[0];
+//    alu_cmp_result = alu_cmp_result_tmp[0];
+//    alu_ready = alu_ready_tmp[0];
+//  end
+//  else if (alu_result_tmp[0] == alu_result_tmp[2] && alu_cmp_result_tmp[0] == alu_cmp_result_tmp[2] && alu_ready_tmp[0] == alu_ready_tmp[2]) begin
+//    alu_result = alu_result_tmp[0];
+//    alu_cmp_result = alu_cmp_result_tmp[0];
+//    alu_ready = alu_ready_tmp[0];
+//  end
+//  else if (alu_result_tmp[1] == alu_result_tmp[2] && alu_cmp_result_tmp[1] == alu_cmp_result_tmp[2] && alu_ready_tmp[1] == alu_ready_tmp[2]) begin
+//    alu_result = alu_result_tmp[1];
+//    alu_cmp_result = alu_cmp_result_tmp[1];
+//    alu_ready = alu_ready_tmp[1];
+//  end
+//  else begin
+//    alu_result = '0;
+//    alu_cmp_result = 1'b0;
+//    alu_ready = 1'b0;   
+//  end
+//end
 
 
   ////////////////////////////////////////////////////////////////
@@ -325,7 +325,7 @@ end
   //                                                            //
   ////////////////////////////////////////////////////////////////
 
-  cv32e40p_mult mult_i (
+  cv32e40p_mult_ft mult_i_ft (
       .clk  (clk),
       .rst_n(rst_n),
 

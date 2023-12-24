@@ -1,19 +1,19 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Engineer:       Massimo Bossetti - Massimo.Bossetti@brembate.it            //
+// Engineer:                                                                  //
 //                                                                            //
 // Additional contributions by:                                               //
-//                 Michael Gautschi - gautschi@iis.ee.ethz.ch                 //
-//                 Davide Schiavone - pschiavo@iis.ee.ethz.ch                 //
 //                                                                            //
-// Design Name:    RISC-V register file                                       //
+//                                                                            //
+//                                                                            //
+// Design Name:    RISC-V register file fault tolerant                        //
 // Project Name:   RI5CY                                                      //
 // Language:       SystemVerilog                                              //
 //                                                                            //
-// Description:    Register file with 31x 32 bit wide registers. Register 0   //
-//                 is fixed to 0. This register file is based on flip-flops.  //
-//                 Also supports the fp-register file now if FPU=1            //
-//                 If ZFINX is 1, floating point operations take values       //
-//                 from the X register file                                   //
+// Description:                                                               //
+//                                                                            //
+//                                                                            //
+//                                                                            //
+//                                                                            //
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 

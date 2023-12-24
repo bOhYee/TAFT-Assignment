@@ -1,6 +1,11 @@
 cv32e40p_top.*
 cv32e40p_top.core_i.ex_stage_i.*
-cv32e40p_top.core_i.ex_stage_i.genblk1_0__alu_i.*
+cv32e40p_top.core_i.ex_stage_i.alu_i_ft.genblk1_0__alu_i.*
+cv32e40p_top.core_i.ex_stage_i.alu_i_ft.genblk1_1__alu_i.*
+cv32e40p_top.core_i.ex_stage_i.alu_i_ft.genblk1_2__alu_i.*
+cv32e40p_top.core_i.ex_stage_i.mult_i_ft.genblk1_0__mult_i.*
+cv32e40p_top.core_i.ex_stage_i.mult_i_ft.genblk1_1__mult_i.*
+cv32e40p_top.core_i.ex_stage_i.mult_i_ft.genblk1_2__mult_i.*
 cv32e40p_top.core_i.id_stage_i.register_file_i_ft.register_file_i.*
 cv32e40p_top.core_i.id_stage_i.decoder_i.genblk1_0__cv32e40p_decoder_k.*
 cv32e40p_top.core_i.id_stage_i.decoder_i.genblk1_1__cv32e40p_decoder_k.*
