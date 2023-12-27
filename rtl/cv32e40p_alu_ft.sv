@@ -22,8 +22,11 @@ module cv32e40p_alu_ft
     output logic        comparison_result_o,
 
     output logic ready_o,
-    input  logic ex_ready_i
+    input  logic ex_ready_i,
+	output logic [2:0] error_detected_alu
 );
+
+
 
 	// ALU signals
 	// logic [31:0] alu_result_tmp [3:0];
@@ -43,9 +46,9 @@ module cv32e40p_alu_ft
 
 	// Counter signals
 	// logic en_counter;
-	// logic error_detected_input_a [2:0];
-	// logic error_detected_input_b [2:0];
-	// logic error_detected_input_c [2:0];
+	logic error_detected_input_a [2:0];
+	logic error_detected_input_b [2:0];
+	logic error_detected_input_c [2:0];
 	// logic [15:0] counter_alu_a;
 	// logic [15:0] counter_alu_b;
 	// logic [15:0] counter_alu_c;
@@ -122,14 +125,15 @@ module cv32e40p_alu_ft
 		.data1_i          	( alu_result_tmp[0] ),
 		.data2_i          	( alu_result_tmp[1] ),
 		.data3_i          	( alu_result_tmp[2] ),
-		.dataout_o          ( result_o )
+		.dataout_o          ( result_o ),
 		// .data1_i          	( input_voter_a[0] ),
 		// .data2_i          	( input_voter_a[1] ),
 		// .data3_i          	( input_voter_a[2] ),
 		// .dataout_o          ( result_o ),
-  		// .error_detected_input_a          (error_detected_input_a[0] ),
-  		// .error_detected_input_b          (error_detected_input_b[0] ),
-  		// .error_detected_input_c          (error_detected_input_c[0] )
+  		.error_detected_input_a          (error_detected_input_a[0] ),
+  		.error_detected_input_b          (error_detected_input_b[0] ),
+  		.error_detected_input_c          (error_detected_input_c[0] ),
+		.error_detected					 (error_detected_alu[0])
 	);
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -138,14 +142,15 @@ module cv32e40p_alu_ft
 		.data1_i          	( alu_cmp_result_tmp[0] ),
 		.data2_i          	( alu_cmp_result_tmp[1] ),
 		.data3_i          	( alu_cmp_result_tmp[2] ),
-		.dataout_o          ( comparison_result_o )
+		.dataout_o          ( comparison_result_o ),
 		// .data1_i          	( input_voter_b[0] ),
 		// .data2_i          	( input_voter_b[1] ),
 		// .data3_i          	( input_voter_b[2] ),
 		// .dataout_o          ( comparison_result_o ),
-  		// .error_detected_input_a          (error_detected_input_a[1] ),
-  		// .error_detected_input_b          (error_detected_input_b[1] ),
-  		// .error_detected_input_c          (error_detected_input_c[1] )
+  		.error_detected_input_a          (error_detected_input_a[1] ),
+  		.error_detected_input_b          (error_detected_input_b[1] ),
+  		.error_detected_input_c          (error_detected_input_c[1] ),
+		.error_detected					 (error_detected_alu[1])
 	);	
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -154,14 +159,15 @@ module cv32e40p_alu_ft
 		.data1_i          	( alu_ready_tmp[0] ),
 		.data2_i          	( alu_ready_tmp[1] ),
 		.data3_i          	( alu_ready_tmp[2] ),
-		.dataout_o          ( ready_o )
+		.dataout_o          ( ready_o ),
 		// .data1_i          	( input_voter_c[0] ),
 		// .data2_i          	( input_voter_c[1] ),
 		// .data3_i          	( input_voter_c[2] ),
 		// .dataout_o          ( ready_o ),
-  		// .error_detected_input_a          (error_detected_input_a[2]  ),
-  		// .error_detected_input_b          (error_detected_input_b[2]  ),
-  		// .error_detected_input_c          (error_detected_input_c[2]  )
+  		.error_detected_input_a          (error_detected_input_a[2]  ),
+  		.error_detected_input_b          (error_detected_input_b[2]  ),
+  		.error_detected_input_c          (error_detected_input_c[2]  ),
+		.error_detected					 (error_detected_alu[2])
 	);
 
 

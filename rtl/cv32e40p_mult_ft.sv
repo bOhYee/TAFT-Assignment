@@ -32,7 +32,8 @@ module cv32e40p_mult_ft
     output logic multicycle_o,
     output logic mulh_active_o,
     output logic ready_o,
-    input  logic ex_ready_i
+    input  logic ex_ready_i,
+	output logic [3:0] error_detected_mult
 );
 
 	logic [31:0] result_o_tmp [2:0];
@@ -86,7 +87,8 @@ module cv32e40p_mult_ft
 		.dataout_o          ( result_o ),
   		.error_detected_input_a          ( ),
   		.error_detected_input_b          ( ),
-  		.error_detected_input_c          ( )
+  		.error_detected_input_c          ( ),
+		.error_detected					 (error_detected_mult[0])
 	);
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -98,7 +100,8 @@ module cv32e40p_mult_ft
 		.dataout_o          ( multicycle_o ),
   		.error_detected_input_a          ( ),
   		.error_detected_input_b          ( ),
-  		.error_detected_input_c          ( )
+  		.error_detected_input_c          ( ),
+		.error_detected					 (error_detected_mult[1])
 	);	
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -110,7 +113,8 @@ module cv32e40p_mult_ft
 		.dataout_o          ( mulh_active_o ),
   		.error_detected_input_a          ( ),
   		.error_detected_input_b          ( ),
-  		.error_detected_input_c          ( )
+  		.error_detected_input_c          ( ),
+		.error_detected					 (error_detected_mult[2])
 	);
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -122,7 +126,8 @@ module cv32e40p_mult_ft
 		.dataout_o          ( ready_o ),
   		.error_detected_input_a          ( ),
   		.error_detected_input_b          ( ),
-  		.error_detected_input_c          ( )
+  		.error_detected_input_c          ( ),
+		.error_detected					 (error_detected_mult[3])
 	);
 	
 	
