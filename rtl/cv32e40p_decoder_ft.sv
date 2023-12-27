@@ -283,7 +283,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( illegal_insn_o_tmp[0] ),
   	.data2_i          	( illegal_insn_o_tmp[1] ),
   	.data3_i          	( illegal_insn_o_tmp[2] ),
-  	.dataout_o          ( illegal_insn_o )
+  	.dataout_o          ( illegal_insn_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // trap instruction encountered
@@ -295,7 +298,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( ebrk_insn_o_tmp[0] ),
   	.data2_i          	( ebrk_insn_o_tmp[1] ),
   	.data3_i          	( ebrk_insn_o_tmp[2] ),
-  	.dataout_o          ( ebrk_insn_o )
+  	.dataout_o          ( ebrk_insn_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // return from exception instruction encountered (M)
@@ -307,7 +313,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( mret_insn_o_tmp[0] ),
   	.data2_i          	( mret_insn_o_tmp[1] ),
   	.data3_i          	( mret_insn_o_tmp[2] ),
-  	.dataout_o          ( mret_insn_o )
+  	.dataout_o          ( mret_insn_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // return from exception instruction encountered (S)
@@ -319,7 +328,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( uret_insn_o_tmp[0] ),
   	.data2_i          	( uret_insn_o_tmp[1] ),
   	.data3_i          	( uret_insn_o_tmp[2] ),
-  	.dataout_o          ( uret_insn_o )
+  	.dataout_o          ( uret_insn_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // return from debug (M)dmodule
@@ -331,7 +343,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( dret_insn_o_tmp[0] ),
   	.data2_i          	( dret_insn_o_tmp[1] ),
   	.data3_i          	( dret_insn_o_tmp[2] ),
-  	.dataout_o          ( dret_insn_o )
+  	.dataout_o          ( dret_insn_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // return from exception instruction encountered (M) without deassert	
@@ -343,7 +358,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( mret_dec_o_tmp[0] ),
   	.data2_i          	( mret_dec_o_tmp[1] ),
   	.data3_i          	( mret_dec_o_tmp[2] ),
-  	.dataout_o          ( mret_dec_o )
+  	.dataout_o          ( mret_dec_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // return from exception instruction encountered (S) without deassert
@@ -355,7 +373,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( uret_dec_o_tmp[0] ),
   	.data2_i          	( uret_dec_o_tmp[1] ),
   	.data3_i          	( uret_dec_o_tmp[2] ),
-  	.dataout_o          ( uret_dec_o )
+  	.dataout_o          ( uret_dec_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // return from debug (M) without deassert endmodule
@@ -367,7 +388,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( dret_dec_o_tmp[0] ),
   	.data2_i          	( dret_dec_o_tmp[1] ),
   	.data3_i          	( dret_dec_o_tmp[2] ),
-  	.dataout_o          ( dret_dec_o )
+  	.dataout_o          ( dret_dec_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // environment call (syscall) instruction encountered
@@ -379,7 +403,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( ecall_insn_o_tmp[0] ),
   	.data2_i          	( ecall_insn_o_tmp[1] ),
   	.data3_i          	( ecall_insn_o_tmp[2] ),
-  	.dataout_o          ( ecall_insn_o )
+  	.dataout_o          ( ecall_insn_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // pipeline flush is requested
@@ -391,7 +418,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( wfi_o_tmp[0] ),
   	.data2_i          	( wfi_o_tmp[1] ),
   	.data3_i          	( wfi_o_tmp[2] ),
-  	.dataout_o          ( wfi_o )
+  	.dataout_o          ( wfi_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // fence.i instruction
@@ -403,7 +433,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( fencei_insn_o_tmp[0] ),
   	.data2_i          	( fencei_insn_o_tmp[1] ),
   	.data3_i          	( fencei_insn_o_tmp[2] ),
-  	.dataout_o          ( fencei_insn_o )
+  	.dataout_o          ( fencei_insn_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
    
   // rs1 is used by current instruction
@@ -415,7 +448,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( rega_used_o_tmp[0] ),
   	.data2_i          	( rega_used_o_tmp[1] ),
   	.data3_i          	( rega_used_o_tmp[2] ),
-  	.dataout_o          ( rega_used_o )
+  	.dataout_o          ( rega_used_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // rs2 is used by current instruction
@@ -427,7 +463,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( regb_used_o_tmp[0] ),
   	.data2_i          	( regb_used_o_tmp[1] ),
   	.data3_i          	( regb_used_o_tmp[2] ),
-  	.dataout_o          ( regb_used_o )
+  	.dataout_o          ( regb_used_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // rs3 is used by current instruction	
@@ -439,7 +478,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( regc_used_o_tmp[0] ),
   	.data2_i          	( regc_used_o_tmp[1] ),
   	.data3_i          	( regc_used_o_tmp[2] ),
-  	.dataout_o          ( regc_used_o )
+  	.dataout_o          ( regc_used_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // fp reg a is used
@@ -451,7 +493,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( reg_fp_a_o_tmp[0] ),
   	.data2_i          	( reg_fp_a_o_tmp[1] ),
   	.data3_i          	( reg_fp_a_o_tmp[2] ),
-  	.dataout_o          ( reg_fp_a_o )
+  	.dataout_o          ( reg_fp_a_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
    
   // fp reg b is used
@@ -463,7 +508,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( reg_fp_b_o_tmp[0] ),
   	.data2_i          	( reg_fp_b_o_tmp[1] ),
   	.data3_i          	( reg_fp_b_o_tmp[2] ),
-  	.dataout_o          ( reg_fp_b_o )
+  	.dataout_o          ( reg_fp_b_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // fp reg c is used
@@ -475,7 +523,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( reg_fp_c_o_tmp[0] ),
   	.data2_i          	( reg_fp_c_o_tmp[1] ),
   	.data3_i          	( reg_fp_c_o_tmp[2] ),
-  	.dataout_o          ( reg_fp_c_o )
+  	.dataout_o          ( reg_fp_c_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // fp reg d is used	
@@ -487,7 +538,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( reg_fp_d_o_tmp[0] ),
   	.data2_i          	( reg_fp_d_o_tmp[1] ),
   	.data3_i          	( reg_fp_d_o_tmp[2] ),
-  	.dataout_o          ( reg_fp_d_o )
+  	.dataout_o          ( reg_fp_d_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // bit manipulation mask a mux
@@ -499,7 +553,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( bmask_a_mux_o_tmp[0] ),
   	.data2_i          	( bmask_a_mux_o_tmp[1] ),
   	.data3_i          	( bmask_a_mux_o_tmp[2] ),
-  	.dataout_o          ( bmask_a_mux_o )
+  	.dataout_o          ( bmask_a_mux_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // bit manipulation mask b mux	
@@ -511,7 +568,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( bmask_b_mux_o_tmp[0] ),
   	.data2_i          	( bmask_b_mux_o_tmp[1] ),
   	.data3_i          	( bmask_b_mux_o_tmp[2] ),
-  	.dataout_o          ( bmask_b_mux_o )
+  	.dataout_o          ( bmask_b_mux_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // bit manipulation mask a mux (reg or imm)
@@ -523,7 +583,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( alu_bmask_a_mux_sel_o_tmp[0] ),
   	.data2_i          	( alu_bmask_a_mux_sel_o_tmp[1] ),
   	.data3_i          	( alu_bmask_a_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( alu_bmask_a_mux_sel_o )
+  	.dataout_o          ( alu_bmask_a_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // bit manipulation mask b mux (reg or imm)	
@@ -535,7 +598,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( alu_bmask_b_mux_sel_o_tmp[0] ),
   	.data2_i          	( alu_bmask_b_mux_sel_o_tmp[1] ),
   	.data3_i          	( alu_bmask_b_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( alu_bmask_b_mux_sel_o )
+  	.dataout_o          ( alu_bmask_b_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
 
     ////////////////////////////////////////////////////////////////////////
@@ -551,7 +617,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( alu_en_o_tmp[0] ),
   	.data2_i          	( alu_en_o_tmp[1] ),
   	.data3_i          	( alu_en_o_tmp[2] ),
-  	.dataout_o          ( alu_en_o )
+  	.dataout_o          ( alu_en_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
    // ALU operation selection parameter | ALU_OP_WIDTH = 7 defined in include/cv32e40p_pkg.sv	
@@ -563,7 +632,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( alu_operator_o_tmp[0] ),
   	.data2_i          	( alu_operator_o_tmp[1] ),
   	.data3_i          	( alu_operator_o_tmp[2] ),
-  	.dataout_o          ( alu_operator_o )
+  	.dataout_o          ( alu_operator_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // operand a selection: reg value, PC, immediate or zero	
@@ -575,7 +647,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( alu_op_a_mux_sel_o_tmp[0] ),
   	.data2_i          	( alu_op_a_mux_sel_o_tmp[1] ),
   	.data3_i          	( alu_op_a_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( alu_op_a_mux_sel_o )
+  	.dataout_o          ( alu_op_a_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // operand b selection: reg value or immediate
@@ -587,7 +662,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( alu_op_b_mux_sel_o_tmp[0] ),
   	.data2_i          	( alu_op_b_mux_sel_o_tmp[1] ),
   	.data3_i          	( alu_op_b_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( alu_op_b_mux_sel_o )
+  	.dataout_o          ( alu_op_b_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // operand c selection: reg value or jump target	
@@ -599,7 +677,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( alu_op_c_mux_sel_o_tmp[0] ),
   	.data2_i          	( alu_op_c_mux_sel_o_tmp[1] ),
   	.data3_i          	( alu_op_c_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( alu_op_c_mux_sel_o )
+  	.dataout_o          ( alu_op_c_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // vectorial instruction
@@ -611,7 +692,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( alu_vec_o_tmp[0] ),
   	.data2_i          	( alu_vec_o_tmp[1] ),
   	.data3_i          	( alu_vec_o_tmp[2] ),
-  	.dataout_o          ( alu_vec_o )
+  	.dataout_o          ( alu_vec_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
 
   
@@ -624,7 +708,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( alu_vec_mode_o_tmp[0] ),
   	.data2_i          	( alu_vec_mode_o_tmp[1] ),
   	.data3_i          	( alu_vec_mode_o_tmp[2] ),
-  	.dataout_o          ( alu_vec_mode_o )
+  	.dataout_o          ( alu_vec_mode_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // scalar replication enable
@@ -636,7 +723,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( scalar_replication_o_tmp[0] ),
   	.data2_i          	( scalar_replication_o_tmp[1] ),
   	.data3_i          	( scalar_replication_o_tmp[2] ),
-  	.dataout_o          ( scalar_replication_o )
+  	.dataout_o          ( scalar_replication_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
           
   // scalar replication enable for operand C
@@ -648,7 +738,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( scalar_replication_c_o_tmp[0] ),
   	.data2_i          	( scalar_replication_c_o_tmp[1] ),
   	.data3_i          	( scalar_replication_c_o_tmp[2] ),
-  	.dataout_o          ( scalar_replication_c_o )
+  	.dataout_o          ( scalar_replication_c_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // immediate selection for operand a
@@ -660,7 +753,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( imm_a_mux_sel_o_tmp[0] ),
   	.data2_i          	( imm_a_mux_sel_o_tmp[1] ),
   	.data3_i          	( imm_a_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( imm_a_mux_sel_o )
+  	.dataout_o          ( imm_a_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
 
   // immediate selection for operand b
@@ -672,7 +768,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( imm_b_mux_sel_o_tmp[0] ),
   	.data2_i          	( imm_b_mux_sel_o_tmp[1] ),
   	.data3_i          	( imm_b_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( imm_b_mux_sel_o )
+  	.dataout_o          ( imm_b_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // register c selection: S3, RD or 0
@@ -684,7 +783,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( regc_mux_o_tmp[0] ),
   	.data2_i          	( regc_mux_o_tmp[1] ),
   	.data3_i          	( regc_mux_o_tmp[2] ),
-  	.dataout_o          ( regc_mux_o )
+  	.dataout_o          ( regc_mux_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // whether the instruction is complex (pulpv3) or not
@@ -696,7 +798,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( is_clpx_o_tmp[0] ),
   	.data2_i          	( is_clpx_o_tmp[1] ),
   	.data3_i          	( is_clpx_o_tmp[2] ),
-  	.dataout_o          ( is_clpx_o )
+  	.dataout_o          ( is_clpx_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // is_subrot_o_tmp
@@ -708,7 +813,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( is_subrot_o_tmp[0] ),
   	.data2_i          	( is_subrot_o_tmp[1] ),
   	.data3_i          	( is_subrot_o_tmp[2] ),
-  	.dataout_o          ( is_subrot_o )
+  	.dataout_o          ( is_subrot_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -724,7 +832,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( mult_operator_o_tmp[0] ),
   	.data2_i          	( mult_operator_o_tmp[1] ),
   	.data3_i          	( mult_operator_o_tmp[2] ),
-  	.dataout_o          ( mult_operator_o )
+  	.dataout_o          ( mult_operator_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // perform integer multiplication
@@ -736,7 +847,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( mult_int_en_o_tmp[0] ),
   	.data2_i          	( mult_int_en_o_tmp[1] ),
   	.data3_i          	( mult_int_en_o_tmp[2] ),
-  	.dataout_o          ( mult_int_en_o )
+  	.dataout_o          ( mult_int_en_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // perform dot multiplication
@@ -748,7 +862,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( mult_dot_en_o_tmp[0] ),
   	.data2_i          	( mult_dot_en_o_tmp[1] ),
   	.data3_i          	( mult_dot_en_o_tmp[2] ),
-  	.dataout_o          ( mult_dot_en_o )
+  	.dataout_o          ( mult_dot_en_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // Multiplication immediate mux selector
@@ -760,7 +877,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( mult_imm_mux_o_tmp[0] ),
   	.data2_i          	( mult_imm_mux_o_tmp[1] ),
   	.data3_i          	( mult_imm_mux_o_tmp[2] ),
-  	.dataout_o          ( mult_imm_mux_o )
+  	.dataout_o          ( mult_imm_mux_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
                            
   // Select subwords for 16x16 bit of multiplier
@@ -772,7 +892,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( mult_sel_subword_o_tmp[0] ),
   	.data2_i          	( mult_sel_subword_o_tmp[1] ),
   	.data3_i          	( mult_sel_subword_o_tmp[2] ),
-  	.dataout_o          ( mult_sel_subword_o )
+  	.dataout_o          ( mult_sel_subword_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // Multiplication in signed mode
@@ -784,7 +907,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( mult_signed_mode_o_tmp[0] ),
   	.data2_i          	( mult_signed_mode_o_tmp[1] ),
   	.data3_i          	( mult_signed_mode_o_tmp[2] ),
-  	.dataout_o          ( mult_signed_mode_o )
+  	.dataout_o          ( mult_signed_mode_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // Dot product in signed mode
@@ -796,7 +922,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( mult_dot_signed_o_tmp[0] ),
   	.data2_i          	( mult_dot_signed_o_tmp[1] ),
   	.data3_i          	( mult_dot_signed_o_tmp[2] ),
-  	.dataout_o          ( mult_dot_signed_o )
+  	.dataout_o          ( mult_dot_signed_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
       
   // fpu destination format | FP_FORMAT_BITS = $clog2(5);
@@ -808,7 +937,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( fpu_dst_fmt_o_tmp[0] ),
   	.data2_i          	( fpu_dst_fmt_o_tmp[1] ),
   	.data3_i          	( fpu_dst_fmt_o_tmp[2] ),
-  	.dataout_o          ( fpu_dst_fmt_o )
+  	.dataout_o          ( fpu_dst_fmt_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // fpu source format | FP_FORMAT_BITS = $clog2(5);
@@ -820,7 +952,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( fpu_src_fmt_o_tmp[0] ),
   	.data2_i          	( fpu_src_fmt_o_tmp[1] ),
   	.data3_i          	( fpu_src_fmt_o_tmp[2] ),
-  	.dataout_o          ( fpu_src_fmt_o )
+  	.dataout_o          ( fpu_src_fmt_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // fpu integer format (for casts) | INT_FORMAT_BITS = $clog2(4);
@@ -832,7 +967,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( fpu_int_fmt_o_tmp[0] ),
   	.data2_i          	( fpu_int_fmt_o_tmp[1] ),
   	.data3_i          	( fpu_int_fmt_o_tmp[2] ),
-  	.dataout_o          ( fpu_int_fmt_o )
+  	.dataout_o          ( fpu_int_fmt_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -848,7 +986,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( apu_en_o_tmp[0] ),
   	.data2_i          	( apu_en_o_tmp[1] ),
   	.data3_i          	( apu_en_o_tmp[2] ),
-  	.dataout_o          ( apu_en_o )
+  	.dataout_o          ( apu_en_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // apu_op_o_tmp | APU_WOP_CPU = 6;
@@ -860,7 +1001,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( apu_op_o_tmp[0] ),
   	.data2_i          	( apu_op_o_tmp[1] ),
   	.data3_i          	( apu_op_o_tmp[2] ),
-  	.dataout_o          ( apu_op_o )
+  	.dataout_o          ( apu_op_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // apu_en_o_tmp
@@ -872,7 +1016,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( apu_lat_o_tmp[0] ),
   	.data2_i          	( apu_lat_o_tmp[1] ),
   	.data3_i          	( apu_lat_o_tmp[2] ),
-  	.dataout_o          ( apu_lat_o )
+  	.dataout_o          ( apu_lat_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // fp_rnd_mode_o_tmp
@@ -884,7 +1031,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( fp_rnd_mode_o_tmp[0] ),
   	.data2_i          	( fp_rnd_mode_o_tmp[1] ),
   	.data3_i          	( fp_rnd_mode_o_tmp[2] ),
-  	.dataout_o          ( fp_rnd_mode_o )
+  	.dataout_o          ( fp_rnd_mode_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -900,7 +1050,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( regfile_mem_we_o_tmp[0] ),
   	.data2_i          	( regfile_mem_we_o_tmp[1] ),
   	.data3_i          	( regfile_mem_we_o_tmp[2] ),
-  	.dataout_o          ( regfile_mem_we_o )
+  	.dataout_o          ( regfile_mem_we_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // write enable for 2nd regfile port
@@ -912,7 +1065,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( regfile_alu_we_o_tmp[0] ),
   	.data2_i          	( regfile_alu_we_o_tmp[1] ),
   	.data3_i          	( regfile_alu_we_o_tmp[2] ),
-  	.dataout_o          ( regfile_alu_we_o )
+  	.dataout_o          ( regfile_alu_we_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // write enable for 2nd regfile port without deassert
@@ -924,7 +1080,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( regfile_alu_we_dec_o_tmp[0] ),
   	.data2_i          	( regfile_alu_we_dec_o_tmp[1] ),
   	.data3_i          	( regfile_alu_we_dec_o_tmp[2] ),
-  	.dataout_o          ( regfile_alu_we_dec_o )
+  	.dataout_o          ( regfile_alu_we_dec_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // Select register write address for ALU/MUL operations
@@ -937,7 +1096,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( regfile_alu_waddr_sel_o_tmp[0] ),
   	.data2_i          	( regfile_alu_waddr_sel_o_tmp[1] ),
   	.data3_i          	( regfile_alu_waddr_sel_o_tmp[2] ),
-  	.dataout_o          ( regfile_alu_waddr_sel_o )
+  	.dataout_o          ( regfile_alu_waddr_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -953,7 +1115,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( csr_access_o_tmp[0] ),
   	.data2_i          	( csr_access_o_tmp[1] ),
   	.data3_i          	( csr_access_o_tmp[2] ),
-  	.dataout_o          ( csr_access_o )
+  	.dataout_o          ( csr_access_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // access to xstatus CSR
@@ -965,7 +1130,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( csr_status_o_tmp[0] ),
   	.data2_i          	( csr_status_o_tmp[1] ),
   	.data3_i          	( csr_status_o_tmp[2] ),
-  	.dataout_o          ( csr_status_o )
+  	.dataout_o          ( csr_status_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // operation to perform on CSR | CSR_OP_WIDTH = 2;
@@ -977,7 +1145,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( csr_op_o_tmp[0] ),
   	.data2_i          	( csr_op_o_tmp[1] ),
   	.data3_i          	( csr_op_o_tmp[2] ),
-  	.dataout_o          ( csr_op_o )
+  	.dataout_o          ( csr_op_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -993,7 +1164,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( data_req_o_tmp[0] ),
   	.data2_i          	( data_req_o_tmp[1] ),
   	.data3_i          	( data_req_o_tmp[2] ),
-  	.dataout_o          ( data_req_o )
+  	.dataout_o          ( data_req_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // data memory write enable
@@ -1005,7 +1179,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( data_we_o_tmp[0] ),
   	.data2_i          	( data_we_o_tmp[1] ),
   	.data3_i          	( data_we_o_tmp[2] ),
-  	.dataout_o          ( data_we_o )
+  	.dataout_o          ( data_we_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // when not active bypass the alu result for address calculation
@@ -1017,7 +1194,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( prepost_useincr_o_tmp[0] ),
   	.data2_i          	( prepost_useincr_o_tmp[1] ),
   	.data3_i          	( prepost_useincr_o_tmp[2] ),
-  	.dataout_o          ( prepost_useincr_o )
+  	.dataout_o          ( prepost_useincr_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // data type on data memory: byte, half word or word
@@ -1029,7 +1209,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( data_type_o_tmp[0] ),
   	.data2_i          	( data_type_o_tmp[1] ),
   	.data3_i          	( data_type_o_tmp[2] ),
-  	.dataout_o          ( data_type_o )
+  	.dataout_o          ( data_type_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
    
   // sign extension on read data from data memory / NaN boxing
@@ -1041,7 +1224,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( data_sign_extension_o_tmp[0] ),
   	.data2_i          	( data_sign_extension_o_tmp[1] ),
   	.data3_i          	( data_sign_extension_o_tmp[2] ),
-  	.dataout_o          ( data_sign_extension_o )
+  	.dataout_o          ( data_sign_extension_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // offset in byte inside register for stores
@@ -1053,7 +1239,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( data_reg_offset_o_tmp[0] ),
   	.data2_i          	( data_reg_offset_o_tmp[1] ),
   	.data3_i          	( data_reg_offset_o_tmp[2] ),
-  	.dataout_o          ( data_reg_offset_o )
+  	.dataout_o          ( data_reg_offset_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // data request is in the special event range
@@ -1065,7 +1254,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( data_load_event_o_tmp[0] ),
   	.data2_i          	( data_load_event_o_tmp[1] ),
   	.data3_i          	( data_load_event_o_tmp[2] ),
-  	.dataout_o          ( data_load_event_o )
+  	.dataout_o          ( data_load_event_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -1081,7 +1273,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( atop_o_tmp[0] ),
   	.data2_i          	( atop_o_tmp[1] ),
   	.data3_i          	( atop_o_tmp[2] ),
-  	.dataout_o          ( atop_o )
+  	.dataout_o          ( atop_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
 
     ////////////////////////////////////////////////////////////////////////
@@ -1097,7 +1292,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( hwlp_we_o_tmp[0] ),
   	.data2_i          	( hwlp_we_o_tmp[1] ),
   	.data3_i          	( hwlp_we_o_tmp[2] ),
-  	.dataout_o          ( hwlp_we_o )
+  	.dataout_o          ( hwlp_we_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // selects immediate for hwloop target
@@ -1109,7 +1307,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( hwlp_target_mux_sel_o_tmp[0] ),
   	.data2_i          	( hwlp_target_mux_sel_o_tmp[1] ),
   	.data3_i          	( hwlp_target_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( hwlp_target_mux_sel_o )
+  	.dataout_o          ( hwlp_target_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // selects hwloop start address input
@@ -1121,7 +1322,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( hwlp_start_mux_sel_o_tmp[0] ),
   	.data2_i          	( hwlp_start_mux_sel_o_tmp[1] ),
   	.data3_i          	( hwlp_start_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( hwlp_start_mux_sel_o )
+  	.dataout_o          ( hwlp_start_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // selects hwloop counter input
@@ -1133,7 +1337,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( hwlp_cnt_mux_sel_o_tmp[0] ),
   	.data2_i          	( hwlp_cnt_mux_sel_o_tmp[1] ),
   	.data3_i          	( hwlp_cnt_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( hwlp_cnt_mux_sel_o )
+  	.dataout_o          ( hwlp_cnt_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );  
   
     ////////////////////////////////////////////////////////////////////////
@@ -1149,7 +1356,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( ctrl_transfer_insn_in_dec_o_tmp[0] ),
   	.data2_i          	( ctrl_transfer_insn_in_dec_o_tmp[1] ),
   	.data3_i          	( ctrl_transfer_insn_in_dec_o_tmp[2] ),
-  	.dataout_o          ( ctrl_transfer_insn_in_dec_o )
+  	.dataout_o          ( ctrl_transfer_insn_in_dec_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // control transfer instruction is decoded
@@ -1161,7 +1371,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( ctrl_transfer_insn_in_id_o_tmp[0] ),
   	.data2_i          	( ctrl_transfer_insn_in_id_o_tmp[1] ),
   	.data3_i          	( ctrl_transfer_insn_in_id_o_tmp[2] ),
-  	.dataout_o          ( ctrl_transfer_insn_in_id_o )
+  	.dataout_o          ( ctrl_transfer_insn_in_id_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   // jump target selection
@@ -1173,7 +1386,10 @@ module cv32e40p_decoder_ft
   	.data1_i          	( ctrl_transfer_target_mux_sel_o_tmp[0] ),
   	.data2_i          	( ctrl_transfer_target_mux_sel_o_tmp[1] ),
   	.data3_i          	( ctrl_transfer_target_mux_sel_o_tmp[2] ),
-  	.dataout_o          ( ctrl_transfer_target_mux_sel_o )
+  	.dataout_o          ( ctrl_transfer_target_mux_sel_o ),
+  	.error_detected_input_a          ( ),
+  	.error_detected_input_b          ( ),
+  	.error_detected_input_c          ( )
   );
   
   

@@ -1111,11 +1111,11 @@ module cv32e40p_id_stage
   //                                                                //
   ////////////////////////////////////////////////////////////////////
 
-  cv32e40p_controller #(
+  cv32e40p_controller_ft #(
       .COREV_CLUSTER(COREV_CLUSTER),
       .COREV_PULP   (COREV_PULP),
       .FPU          (FPU)
-  ) controller_i (
+  ) controller_i_ft (
       .clk          (clk),  // Gated clock
       .clk_ungated_i(clk_ungated_i),  // Ungated clock
       .rst_n        (rst_n),

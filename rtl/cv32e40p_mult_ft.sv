@@ -83,7 +83,10 @@ module cv32e40p_mult_ft
 		.data1_i          	( result_o_tmp[0] ),
 		.data2_i          	( result_o_tmp[1] ),
 		.data3_i          	( result_o_tmp[2] ),
-		.dataout_o          ( result_o )
+		.dataout_o          ( result_o ),
+  		.error_detected_input_a          ( ),
+  		.error_detected_input_b          ( ),
+  		.error_detected_input_c          ( )
 	);
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -92,7 +95,10 @@ module cv32e40p_mult_ft
 		.data1_i          	( multicycle_o_tmp[0] ),
 		.data2_i          	( multicycle_o_tmp[1] ),
 		.data3_i          	( multicycle_o_tmp[2] ),
-		.dataout_o          ( multicycle_o )
+		.dataout_o          ( multicycle_o ),
+  		.error_detected_input_a          ( ),
+  		.error_detected_input_b          ( ),
+  		.error_detected_input_c          ( )
 	);	
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -101,7 +107,10 @@ module cv32e40p_mult_ft
 		.data1_i          	( mulh_active_o_tmp[0] ),
 		.data2_i          	( mulh_active_o_tmp[1] ),
 		.data3_i          	( mulh_active_o_tmp[2] ),
-		.dataout_o          ( mulh_active_o )
+		.dataout_o          ( mulh_active_o ),
+  		.error_detected_input_a          ( ),
+  		.error_detected_input_b          ( ),
+  		.error_detected_input_c          ( )
 	);
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -110,7 +119,10 @@ module cv32e40p_mult_ft
 		.data1_i          	( ready_o_tmp[0] ),
 		.data2_i          	( ready_o_tmp[1] ),
 		.data3_i          	( ready_o_tmp[2] ),
-		.dataout_o          ( ready_o )
+		.dataout_o          ( ready_o ),
+  		.error_detected_input_a          ( ),
+  		.error_detected_input_b          ( ),
+  		.error_detected_input_c          ( )
 	);
 	
 	

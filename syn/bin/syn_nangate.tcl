@@ -52,6 +52,7 @@ analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_ff_one.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_popcnt.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_apu_disp.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_controller.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_controller_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_obi_interface.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_prefetch_controller.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_sleep_unit.sv

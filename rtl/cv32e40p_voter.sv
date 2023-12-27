@@ -35,21 +35,39 @@ module cv32e40p_voter
   input  logic [NBIT-1:0]   	data2_i,
   input  logic [NBIT-1:0]   	data3_i,
 
-  output logic [NBIT-1:0]		dataout_o
+  output logic [NBIT-1:0]		dataout_o,
+  output logic 					error_detected_input_a,
+  output logic 					error_detected_input_b,
+  output logic 					error_detected_input_c
 );
 
 //structural description of majority voter of 3
 
 always_comb
+
 begin	
+
+error_detected_input_a = 0;
+error_detected_input_b = 0;
+error_detected_input_c = 0;
+
 	if (data2_i==data3_i) begin
 		dataout_o = data2_i;
+		if (data1_i != data2_i) begin
+			error_detected_input_a = 1;
+		end
 	end 
 	else if(data2_i==data1_i) begin
 		dataout_o = data1_i;
+		if (data3_i != data1_i) begin
+			error_detected_input_c = 1;
+		end
 	end
 	else if(data3_i==data1_i) begin
 		dataout_o = data1_i;
+		if (data2_i != data1_i) begin
+			error_detected_input_b = 1;
+		end
 	end
 	else begin
 		// IF ALL THE OUTPUTS ARE DIFFERENT, data1_i IS SENT TO THE OUTPUT

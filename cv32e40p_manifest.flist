@@ -58,6 +58,7 @@ ${DESIGN_RTL_DIR}/cv32e40p_ff_one.sv
 ${DESIGN_RTL_DIR}/cv32e40p_popcnt.sv
 ${DESIGN_RTL_DIR}/cv32e40p_apu_disp.sv
 ${DESIGN_RTL_DIR}/cv32e40p_controller.sv
+${DESIGN_RTL_DIR}/cv32e40p_controller_ft.sv
 ${DESIGN_RTL_DIR}/cv32e40p_obi_interface.sv
 ${DESIGN_RTL_DIR}/cv32e40p_prefetch_controller.sv
 ${DESIGN_RTL_DIR}/cv32e40p_sleep_unit.sv
