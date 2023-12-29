@@ -10,6 +10,8 @@
 
 // Top file instantiating a CV32E40P core and an optional FPU
 // Contributor: Davide Schiavone <davide@openhwgroup.org>
+//typedef logic [31:0] alu_result_type [2:0];
+
 
 module cv32e40p_top #(
     parameter COREV_PULP = 0, // PULP ISA Extension (incl. custom CSRs and hardware loop, excl. cv.elw)

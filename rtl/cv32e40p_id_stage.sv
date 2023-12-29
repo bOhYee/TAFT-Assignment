@@ -928,12 +928,12 @@ module cv32e40p_id_stage
   //                                                     //
   /////////////////////////////////////////////////////////
 
-  cv32e40p_register_file #(
+  cv32e40p_register_file_ft #(
       .ADDR_WIDTH(6),
       .DATA_WIDTH(32),
       .FPU       (FPU),
       .ZFINX     (ZFINX)
-  ) register_file_i (
+  ) register_file_i_ft (
       .clk  (clk),
       .rst_n(rst_n),
 
@@ -972,7 +972,7 @@ module cv32e40p_id_stage
   //                                           //
   ///////////////////////////////////////////////
 
-  cv32e40p_decoder #(
+  cv32e40p_decoder_ft #(
       .COREV_PULP      (COREV_PULP),
       .COREV_CLUSTER   (COREV_CLUSTER),
       .A_EXTENSION     (A_EXTENSION),
@@ -1111,11 +1111,11 @@ module cv32e40p_id_stage
   //                                                                //
   ////////////////////////////////////////////////////////////////////
 
-  cv32e40p_controller #(
+  cv32e40p_controller_ft #(
       .COREV_CLUSTER(COREV_CLUSTER),
       .COREV_PULP   (COREV_PULP),
       .FPU          (FPU)
-  ) controller_i (
+  ) controller_i_ft (
       .clk          (clk),  // Gated clock
       .clk_ungated_i(clk_ungated_i),  // Ungated clock
       .rst_n        (rst_n),

@@ -175,8 +175,10 @@ module cv32e40p_if_stage #(
 
   assign fetch_failed    = 1'b0; // PMP is not supported in CV32E40P
 
-  // prefetch buffer, caches a fixed number of instructions
-  cv32e40p_prefetch_buffer #(
+  // MODDED PREFETCH BUFFER
+  logic [4:0] buffer_error_voter;
+
+  cv32e40p_prefetch_buffer_ft #(
       .PULP_OBI  (PULP_OBI),
       .COREV_PULP(COREV_PULP)
   ) prefetch_buffer_i (
@@ -205,7 +207,10 @@ module cv32e40p_if_stage #(
       .instr_rdata_i  (instr_rdata_i),
 
       // Prefetch Buffer Status
-      .busy_o(prefetch_busy)
+      .busy_o(prefetch_busy),
+
+      // MOD
+      .error_voter  (buffer_error_voter)
   );
 
   // offset FSM state transition logic
@@ -254,7 +259,11 @@ module cv32e40p_if_stage #(
   assign if_ready = fetch_valid & id_ready_i;
   assign if_valid = (~halt_if_i) & if_ready;
 
-  cv32e40p_aligner aligner_i (
+
+  // MODDED ALIGNER
+  logic [3:0] aligner_error_voter;
+
+  cv32e40p_aligner_ft aligner_i (
       .clk             (clk),
       .rst_n           (rst_n),
       .fetch_valid_i   (fetch_valid),
@@ -267,17 +276,22 @@ module cv32e40p_if_stage #(
       .branch_i        (branch_req),
       .hwlp_addr_i     (hwlp_target_i),
       .hwlp_update_pc_i(hwlp_jump_i),
-      .pc_o            (pc_if_o)
+      .pc_o            (pc_if_o),
+      .error_voter  (aligner_error_voter)
   );
 
-  cv32e40p_compressed_decoder #(
+  // MODDED COMPRESSOR
+  logic [2:0] compressed_error_voter;
+
+  cv32e40p_compressed_decoder_ft #(
       .FPU  (FPU),
       .ZFINX(ZFINX)
   ) compressed_decoder_i (
       .instr_i        (instr_aligned),
       .instr_o        (instr_decompressed),
       .is_compressed_o(instr_compressed_int),
-      .illegal_instr_o(illegal_c_insn)
+      .illegal_instr_o(illegal_c_insn),
+      .error_voter    (compressed_error_voter)
   );
 
   //----------------------------------------------------------------------------
