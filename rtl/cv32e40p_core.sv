@@ -27,7 +27,6 @@
 //                 and the FPU                                                //
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
-//typedef logic [31:0] alu_result_type [2:0];
 
 module cv32e40p_core
   import cv32e40p_apu_core_pkg::*;
@@ -65,18 +64,10 @@ module cv32e40p_core
     output logic        data_req_o,
     input  logic        data_gnt_i,
     input  logic        data_rvalid_i,
-    
     output logic        data_we_o,
-    //output logic data_we_o_tmp [2:0],
-
     output logic [ 3:0] data_be_o,
-    //output logic [ 3:0] data_be_o_tmp [2:0],
-
     output logic [31:0] data_addr_o,
-    
     output logic [31:0] data_wdata_o,
-    //output logic [31:0] data_wdata_o_tmp [2:0],
-
     input  logic [31:0] data_rdata_i,
 
     // apu-interconnect
@@ -106,18 +97,6 @@ module cv32e40p_core
     // CPU Control Signals
     input  logic fetch_enable_i,
     output logic core_sleep_o
-   // output alu_result_type alu_result_zoix,
-   // output logic alu_cmp_result_zoix [2:0],
-   // output logic alu_ready_zoix [2:0],
-   // output logic [31:0] alu_result_zoix1, 
-   // output logic [31:0] alu_result_zoix2,  
-   // output logic [31:0] alu_result_zoix3,  
-   // output logic        alu_cmp_result_zoix1,
-   // output logic        alu_cmp_result_zoix2,
-   // output logic        alu_cmp_result_zoix3,
-   // output logic        alu_ready_zoix1,
-   // output logic        alu_ready_zoix2,
-   // output logic        alu_ready_zoix3
 );
 
   import cv32e40p_pkg::*;
@@ -140,7 +119,6 @@ module cv32e40p_core
   // these used to be former inputs/outputs of RI5CY
 
   logic [5:0] data_atop_o;  // atomic operation, only active if parameter `A_EXTENSION != 0`
-
   logic       irq_sec_i;
   logic       sec_lvl_o;
 
@@ -288,7 +266,6 @@ module cv32e40p_core
   logic               data_misaligned_ex;
 
   logic               p_elw_start;  // Start of cv.elw load (when data_req_o is sent)
-
   logic               p_elw_finish;  // Finish of cv.elw load (when data_rvalid_i is received)
 
   logic        [31:0] lsu_rdata;
@@ -303,7 +280,6 @@ module cv32e40p_core
   logic               wb_valid;
 
   logic               lsu_ready_ex;
-
   logic               lsu_ready_wb;
 
   logic               apu_ready_wb;
@@ -372,9 +348,7 @@ module cv32e40p_core
   logic [N_PMP_ENTRIES-1:0][ 7:0] pmp_cfg;
 
   logic                           data_req_pmp;
-
   logic [             31:0]       data_addr_pmp;
-
   logic                           data_gnt_pmp;
   logic                           data_err_pmp;
   logic                           data_err_ack;
@@ -897,18 +871,6 @@ module cv32e40p_core
       .ex_ready_o(ex_ready),
       .ex_valid_o(ex_valid),
       .wb_ready_i(lsu_ready_wb)
-      //.alu_result_zoix(alu_result_zoix),
-      //.alu_cmp_result_zoix(alu_cmp_result_zoix),
-      //.alu_ready_zoix(alu_ready_zoix),
-      //.alu_result_zoix1(alu_result_zoix1),
-      //.alu_result_zoix2(alu_result_zoix2),
-      //.alu_result_zoix3(alu_result_zoix3),
-      //.alu_cmp_result_zoix1(alu_cmp_result_zoix1),
-      //.alu_cmp_result_zoix2(alu_cmp_result_zoix2),
-      //.alu_cmp_result_zoix3(alu_cmp_result_zoix3),
-      //.alu_ready_zoix1(alu_ready_zoix1),
-      //.alu_ready_zoix2(alu_ready_zoix2),
-      //.alu_ready_zoix3(alu_ready_zoix3)
   );
 
 
@@ -921,7 +883,7 @@ module cv32e40p_core
   //                                                                                    //
   ////////////////////////////////////////////////////////////////////////////////////////
 
-cv32e40p_load_store_unit #(
+  cv32e40p_load_store_unit #(
       .PULP_OBI(PULP_OBI)
   ) load_store_unit_i (
       .clk  (clk),
