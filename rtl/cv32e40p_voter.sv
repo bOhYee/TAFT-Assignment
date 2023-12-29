@@ -38,47 +38,53 @@ module cv32e40p_voter
   output logic [NBIT-1:0]		dataout_o,
   output logic 					error_detected_input_a,
   output logic 					error_detected_input_b,
-  output logic 					error_detected_input_c,
-  output logic 					error_detected
+  output logic 					error_detected_input_c
+  //output logic 					error_detected
 );
 
 //structural description of majority voter of 3
+logic error_detected_input_a_tmp;
+logic error_detected_input_b_tmp;
+logic error_detected_input_c_tmp;
 
 always_comb
 
 begin	
 
-error_detected_input_a = 0;
-error_detected_input_b = 0;
-error_detected_input_c = 0;
+error_detected_input_a_tmp = 0;
+error_detected_input_b_tmp = 0;
+error_detected_input_c_tmp = 0;
 
 	if (data2_i==data3_i) begin
 		dataout_o = data2_i;
 		if (data1_i != data2_i) begin
-			error_detected_input_a = 1;
+			error_detected_input_a_tmp = 1;
 		end
 	end 
 	else if(data2_i==data1_i) begin
 		dataout_o = data1_i;
 		if (data3_i != data1_i) begin
-			error_detected_input_c = 1;
+			error_detected_input_c_tmp = 1;
 		end
 	end
 	else if(data3_i==data1_i) begin
-		dataout_o = data1_i;
+		dataout_o = data3_i;
 		if (data2_i != data1_i) begin
-			error_detected_input_b = 1;
+			error_detected_input_b_tmp = 1;
 		end
 	end
 	else begin
 		// IF ALL THE OUTPUTS ARE DIFFERENT, data1_i IS SENT TO THE OUTPUT
 		dataout_o = data1_i; 
-		error_detected_input_a = 1;
-		error_detected_input_b = 1;
-		error_detected_input_c = 1;
+		error_detected_input_a_tmp = 1;
+		error_detected_input_b_tmp = 1;
+		error_detected_input_c_tmp = 1;
 	end
 end
 
-	assign error_detected = error_detected_input_a || error_detected_input_b || error_detected_input_c;
+	//assign error_detected = error_detected_input_a_tmp || error_detected_input_b_tmp || error_detected_input_c_tmp;
+	assign error_detected_input_a = error_detected_input_a_tmp;
+	assign error_detected_input_b = error_detected_input_b_tmp;
+	assign error_detected_input_c = error_detected_input_c_tmp;
 
 endmodule

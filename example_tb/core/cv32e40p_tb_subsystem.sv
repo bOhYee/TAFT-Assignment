@@ -66,6 +66,13 @@ module cv32e40p_tb_subsystem #(
 
   logic                               core_sleep_o;
 
+    // FAULT SIGNALS
+    logic [71:0] fault_decoder_o;
+	logic [43:0] fault_controller_o;
+	logic [2:0]  fault_regfile_o;
+    logic [2:0] fault_alu_o;
+    logic [3:0] fault_mult_o;
+
 
 
   assign debug_req_i = 1'b0;
@@ -118,6 +125,11 @@ module cv32e40p_tb_subsystem #(
 
       .fetch_enable_i(fetch_enable_i),
       .core_sleep_o  (core_sleep_o)
+      //.fault_decoder_o(fault_decoder_o),
+	  //.fault_controller_o(fault_controller_o),
+	  //.fault_regfile_o(fault_regfile_o),
+      //.fault_alu_o(fault_alu_o),
+      //.fault_mult_o(fault_mult_o)
   );
 
 

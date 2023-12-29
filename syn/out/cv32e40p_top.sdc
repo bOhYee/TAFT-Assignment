@@ -1,6 +1,6 @@
 ###################################################################
 
-# Created by write_sdc on Tue Dec 26 23:23:45 2023
+# Created by write_sdc on Fri Dec 29 02:26:49 2023
 
 ###################################################################
 set sdc_version 2.1
@@ -269,10 +269,6 @@ set_input_delay -clock clk_i  0.5  [get_ports {dm_exception_addr_i[3]}]
 set_input_delay -clock clk_i  0.5  [get_ports {dm_exception_addr_i[2]}]
 set_input_delay -clock clk_i  0.5  [get_ports {dm_exception_addr_i[1]}]
 set_input_delay -clock clk_i  0.5  [get_ports {dm_exception_addr_i[0]}]
-set_input_delay -clock clk_i  0.5  [get_ports rst_ni]
-set_input_delay -clock clk_i  0.5  [get_ports pulp_clock_en_i]
-set_input_delay -clock clk_i  0.5  [get_ports scan_cg_en_i]
-set_input_delay -clock clk_i  0.5  [get_ports fetch_enable_i]
 set_output_delay -clock clk_i  1.25  [get_ports irq_ack_o]
 set_output_delay -clock clk_i  1.25  [get_ports {irq_id_o[4]}]
 set_output_delay -clock clk_i  1.25  [get_ports {irq_id_o[3]}]
@@ -382,7 +378,4 @@ set_output_delay -clock clk_i  3  [get_ports {data_wdata_o[3]}]
 set_output_delay -clock clk_i  3  [get_ports {data_wdata_o[2]}]
 set_output_delay -clock clk_i  3  [get_ports {data_wdata_o[1]}]
 set_output_delay -clock clk_i  3  [get_ports {data_wdata_o[0]}]
-set_output_delay -clock clk_i  3  [get_ports debug_havereset_o]
-set_output_delay -clock clk_i  3  [get_ports debug_running_o]
-set_output_delay -clock clk_i  3  [get_ports debug_halted_o]
 set_output_delay -clock clk_i  1.25  [get_ports core_sleep_o]

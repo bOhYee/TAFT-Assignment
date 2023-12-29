@@ -51,8 +51,13 @@ module cv32e40p_register_file_ft #(
     input logic [ADDR_WIDTH-1:0] waddr_b_i,
     input logic [DATA_WIDTH-1:0] wdata_b_i,
     input logic                  we_b_i
-);
 	
+	//fault signal
+	//output logic [2:0] fault_hamming_o
+);
+    
+    logic [2:0] fault_hamming_o;
+
 	logic [37:0] rdata_a_o_rf; 
 	logic [37:0] rdata_b_o_rf; 
 	logic [37:0] rdata_c_o_rf; 
@@ -126,5 +131,7 @@ module cv32e40p_register_file_ft #(
 			.data_out(rdata_c_o),
 			.regfile_fault(fault_c)
 		);
+		
+	assign fault_hamming_o = {fault_a , fault_b , fault_c};
 
 endmodule

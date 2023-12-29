@@ -90,7 +90,7 @@ link
 uniquify
 check_design 
 
-source $ROOT_PATH/constraints/cv32e40p_core.sdc
+read_sdc $ROOT_PATH/constraints/cv32e40p_core.sdc
 
 set_operating_conditions $OPER_COND
 
@@ -101,11 +101,9 @@ set uniquify_naming_style "%s_%d"
 uniquify -force
 
 #-gate_clock -no_boundary_optimization -timing
-#set_dont_touch core_i/pc_id
 compile_ultra -no_autoungroup 
 
 report_timing > ${LOG_PATH}/report_timing.log
-report_area -hierarchy > ${LOG_PATH}/report_area_hier.log
 change_names -hierarchy -rules verilog
 write -hierarchy -format verilog -output "${GATE_PATH}/${TOPLEVEL}.v"
 write -hierarchy -format ddc     -output "${GATE_PATH}/${TOPLEVEL}.ddc"

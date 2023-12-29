@@ -252,6 +252,11 @@ module cv32e40p_id_stage
 
     input logic        perf_imiss_i,
     input logic [31:0] mcounteren_i
+	
+	//fault Signals
+	//output logic [71:0] fault_decoder_o,
+	//output logic [43:0] fault_controller_o,
+	//output logic [2:0]  fault_regfile_o
 );
 
   // Source/Destination register instruction index
@@ -960,6 +965,9 @@ module cv32e40p_id_stage
       .waddr_b_i(regfile_alu_waddr_fw_i),
       .wdata_b_i(regfile_alu_wdata_fw_i),
       .we_b_i   (regfile_alu_we_fw_power_i)
+	  
+	  //fault signal
+	  //.fault_hamming_o(fault_regfile_o)
   );
 
 
@@ -1099,6 +1107,9 @@ module cv32e40p_id_stage
 
       // HPM related control signals
       .mcounteren_i(mcounteren_i)
+	  
+	  //fault signal
+	  //.fault_voter_o(fault_decoder_o)
 
   );
 
@@ -1280,6 +1291,9 @@ module cv32e40p_id_stage
 
       // Performance Counters
       .perf_pipeline_stall_o(perf_pipeline_stall)
+	  
+	  //fault signal
+	    //.fault_voter_o(fault_controller_o)
   );
 
 

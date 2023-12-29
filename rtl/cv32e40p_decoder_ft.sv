@@ -9,13 +9,11 @@
 // specific language governing permissions and limitations under the License.
 
 ////////////////////////////////////////////////////////////////////////////////
-// Engineer        Andreas Traber - atraber@iis.ee.ethz.ch                    //
+// Engineer        Andrea Comberiati - s317622@studenti.polito.it             //
 //                                                                            //
 // Additional contributions by:                                               //
-//                 Matthias Baer - baermatt@student.ethz.ch                   //
-//                 Igor Loi - igor.loi@unibo.it                               //
-//                 Sven Stucki - svstucki@student.ethz.ch                     //
-//                 Davide Schiavone - pschiavo@iis.ee.ethz.ch                 //
+//                 Lorenzo Crupi - s314909@studenti.polito.it                 //
+//                                                                            //
 //                                                                            //
 // Design Name:    Decoder                                                    //
 // Project Name:   RI5CY                                                      //
@@ -159,7 +157,13 @@ module cv32e40p_decoder_ft
 
   // HPM related control signals
   input  logic [31:0] mcounteren_i
+  
+  // fault signal
+  //output logic [71:0]      fault_voter_o				// signal to report mismatches in voter's input
 );
+
+
+	logic [71:0]      fault_voter_o;
 
     ///////////////////////////////////////////////////////////////////////////
    //                           TRIPLICATED SIGNALS                         //
@@ -264,7 +268,7 @@ module cv32e40p_decoder_ft
   logic [0:2][1:0]  ctrl_transfer_insn_in_dec_o_tmp;  // control transfer instruction without deassert
   logic [0:2][1:0]  ctrl_transfer_insn_in_id_o_tmp;   // control transfer instruction is decoded
   logic [0:2][1:0]  ctrl_transfer_target_mux_sel_o_tmp;        // jump target selection
-
+  
   
     ///////////////////////////////////////////////////////////////////////////
    //                             MAJORITY VOTERS                           //
@@ -287,6 +291,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[0] )
   );
   
   // trap instruction encountered
@@ -302,6 +307,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[1] )
   );
   
   // return from exception instruction encountered (M)
@@ -317,6 +323,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[2] )
   );
   
   // return from exception instruction encountered (S)
@@ -332,6 +339,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[3] )
   );
   
   // return from debug (M)dmodule
@@ -347,6 +355,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[4] )
   );
   
   // return from exception instruction encountered (M) without deassert	
@@ -362,6 +371,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[5] )
   );
   
   // return from exception instruction encountered (S) without deassert
@@ -377,6 +387,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[6] )
   );
   
   // return from debug (M) without deassert endmodule
@@ -392,6 +403,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[7] )
   );
   
   // environment call (syscall) instruction encountered
@@ -407,6 +419,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[8] )
   );
   
   // pipeline flush is requested
@@ -422,6 +435,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[9] )
   );
   
   // fence.i instruction
@@ -437,6 +451,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[10] )
   );
    
   // rs1 is used by current instruction
@@ -452,6 +467,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[11] )
   );
   
   // rs2 is used by current instruction
@@ -467,6 +483,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[12] )
   );
   
   // rs3 is used by current instruction	
@@ -482,6 +499,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[13] )
   );
   
   // fp reg a is used
@@ -497,6 +515,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[14] )
   );
    
   // fp reg b is used
@@ -512,6 +531,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[15] )
   );
   
   // fp reg c is used
@@ -527,6 +547,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[16] )
   );
   
   // fp reg d is used	
@@ -542,6 +563,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[17] )
   );
   
   // bit manipulation mask a mux
@@ -557,6 +579,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[18] )
   );
   
   // bit manipulation mask b mux	
@@ -572,6 +595,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[19] )
   );
   
   // bit manipulation mask a mux (reg or imm)
@@ -587,6 +611,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[20] )
   );
   
   // bit manipulation mask b mux (reg or imm)	
@@ -602,6 +627,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[21] )
   );
 
     ////////////////////////////////////////////////////////////////////////
@@ -621,6 +647,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[22] )
   );
   
    // ALU operation selection parameter | ALU_OP_WIDTH = 7 defined in include/cv32e40p_pkg.sv	
@@ -636,6 +663,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[23] )
   );
   
   // operand a selection: reg value, PC, immediate or zero	
@@ -651,6 +679,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[24] )
   );
   
   // operand b selection: reg value or immediate
@@ -666,6 +695,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[25] )
   );
   
   // operand c selection: reg value or jump target	
@@ -681,6 +711,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[26] )
   );
   
   // vectorial instruction
@@ -696,6 +727,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[27] )
   );
 
   
@@ -712,6 +744,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[28] )
   );
   
   // scalar replication enable
@@ -727,6 +760,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[29] )
   );
           
   // scalar replication enable for operand C
@@ -742,6 +776,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[30] )
   );
   
   // immediate selection for operand a
@@ -757,6 +792,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[31] )
   );
 
   // immediate selection for operand b
@@ -772,6 +808,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[32] )
   );
   
   // register c selection: S3, RD or 0
@@ -787,6 +824,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[33] )
   );
   
   // whether the instruction is complex (pulpv3) or not
@@ -802,6 +840,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[34] )
   );
   
   // is_subrot_o_tmp
@@ -817,6 +856,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[35] )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -836,6 +876,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[36] )
   );
   
   // perform integer multiplication
@@ -851,6 +892,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[37] )
   );
   
   // perform dot multiplication
@@ -866,6 +908,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[38] )
   );
   
   // Multiplication immediate mux selector
@@ -881,6 +924,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[39] )
   );
                            
   // Select subwords for 16x16 bit of multiplier
@@ -896,6 +940,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[40] )
   );
   
   // Multiplication in signed mode
@@ -911,6 +956,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[41] )
   );
   
   // Dot product in signed mode
@@ -926,6 +972,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[42] )
   );
       
   // fpu destination format | FP_FORMAT_BITS = $clog2(5);
@@ -941,6 +988,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[43] )
   );
   
   // fpu source format | FP_FORMAT_BITS = $clog2(5);
@@ -956,6 +1004,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[44] )
   );
   
   // fpu integer format (for casts) | INT_FORMAT_BITS = $clog2(4);
@@ -971,6 +1020,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[45] )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -990,6 +1040,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[46] )
   );
   
   // apu_op_o_tmp | APU_WOP_CPU = 6;
@@ -1005,6 +1056,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[47] )
   );
   
   // apu_en_o_tmp
@@ -1020,6 +1072,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[48] )
   );
   
   // fp_rnd_mode_o_tmp
@@ -1035,6 +1088,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[49] )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -1054,6 +1108,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[50] )
   );
   
   // write enable for 2nd regfile port
@@ -1069,6 +1124,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[51] )
   );
   
   // write enable for 2nd regfile port without deassert
@@ -1084,6 +1140,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[52] )
   );
   
   // Select register write address for ALU/MUL operations
@@ -1100,6 +1157,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[53] )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -1119,6 +1177,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[54] )
   );
   
   // access to xstatus CSR
@@ -1134,6 +1193,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[55] )
   );
   
   // operation to perform on CSR | CSR_OP_WIDTH = 2;
@@ -1149,6 +1209,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[56] )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -1168,6 +1229,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[57] )
   );
   
   // data memory write enable
@@ -1183,6 +1245,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[58] )
   );
   
   // when not active bypass the alu result for address calculation
@@ -1198,6 +1261,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[59] )
   );
   
   // data type on data memory: byte, half word or word
@@ -1213,6 +1277,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[60] )
   );
    
   // sign extension on read data from data memory / NaN boxing
@@ -1228,6 +1293,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[61] )
   );
   
   // offset in byte inside register for stores
@@ -1243,6 +1309,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[62] )
   );
   
   // data request is in the special event range
@@ -1258,6 +1325,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[63] )
   );
   
     ////////////////////////////////////////////////////////////////////////
@@ -1277,6 +1345,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[64] )
   );
 
     ////////////////////////////////////////////////////////////////////////
@@ -1296,6 +1365,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[65] )
   );
   
   // selects immediate for hwloop target
@@ -1311,6 +1381,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[66] )
   );
   
   // selects hwloop start address input
@@ -1326,6 +1397,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[67] )
   );
   
   // selects hwloop counter input
@@ -1341,6 +1413,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[68] )
   );  
   
     ////////////////////////////////////////////////////////////////////////
@@ -1360,6 +1433,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[69] )
   );
   
   // control transfer instruction is decoded
@@ -1375,6 +1449,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[70] )
   );
   
   // jump target selection
@@ -1390,6 +1465,7 @@ module cv32e40p_decoder_ft
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
   	.error_detected_input_c          ( )
+	// .error_detected				     ( fault_voter_o[71] )
   );
   
   
@@ -1397,133 +1473,495 @@ module cv32e40p_decoder_ft
    //                             TRIPLE DECODER                            //
   ///////////////////////////////////////////////////////////////////////////
 
-  genvar k;
+//   genvar k;
 
-  generate
-	for (k = 0; k<3; k++) begin
-	   cv32e40p_decoder #(
-	     .COREV_PULP       (COREV_PULP      ),             // PULP ISA Extension (including PULP specific CSRs and hardware loop, excluding cv.elw)
-		 .COREV_CLUSTER    (COREV_CLUSTER   ),             // PULP ISA Extension cv.elw (need COREV_PULP = 1)
-		 .A_EXTENSION      (A_EXTENSION     ),
-		 .FPU              (FPU             ),
-		 .FPU_ADDMUL_LAT   (FPU_ADDMUL_LAT  ),
-		 .FPU_OTHERS_LAT   (FPU_OTHERS_LAT  ),
-		 .ZFINX            (ZFINX           ),
-		 .PULP_SECURE      (PULP_SECURE     ),
-		 .USE_PMP          (USE_PMP         ),
-		 .APU_WOP_CPU      (APU_WOP_CPU     ),
-		 .DEBUG_TRIGGER_EN (DEBUG_TRIGGER_EN)
-		) 
-		cv32e40p_decoder_k
-		(
-		 .deassert_we_i                  ( deassert_we_i ),         
+//   generate
+// 	for (k = 0; k<3; k++) begin
+// 	   cv32e40p_decoder #(
+// 	     .COREV_PULP       (COREV_PULP      ),             // PULP ISA Extension (including PULP specific CSRs and hardware loop, excluding cv.elw)
+// 		 .COREV_CLUSTER    (COREV_CLUSTER   ),             // PULP ISA Extension cv.elw (need COREV_PULP = 1)
+// 		 .A_EXTENSION      (A_EXTENSION     ),
+// 		 .FPU              (FPU             ),
+// 		 .FPU_ADDMUL_LAT   (FPU_ADDMUL_LAT  ),
+// 		 .FPU_OTHERS_LAT   (FPU_OTHERS_LAT  ),
+// 		 .ZFINX            (ZFINX           ),
+// 		 .PULP_SECURE      (PULP_SECURE     ),
+// 		 .USE_PMP          (USE_PMP         ),
+// 		 .APU_WOP_CPU      (APU_WOP_CPU     ),
+// 		 .DEBUG_TRIGGER_EN (DEBUG_TRIGGER_EN)
+// 		) 
+// 		cv32e40p_decoder_k
+// 		(
+// 		 .deassert_we_i                  ( deassert_we_i ),         
 										   
-         .illegal_insn_o               ( illegal_insn_o_tmp[k]                      ),         
-	     .ebrk_insn_o                    ( ebrk_insn_o_tmp[k]                         ),             
+//          .illegal_insn_o               ( illegal_insn_o_tmp[k]                      ),         
+// 	     .ebrk_insn_o                    ( ebrk_insn_o_tmp[k]                         ),             
 
-	     .mret_insn_o                    ( mret_insn_o_tmp[k]                         ),                 
-	     .uret_insn_o                    ( uret_insn_o_tmp[k]                         ),                 
-	     .dret_insn_o                    ( dret_insn_o_tmp[k]                         ),                 
+// 	     .mret_insn_o                    ( mret_insn_o_tmp[k]                         ),                 
+// 	     .uret_insn_o                    ( uret_insn_o_tmp[k]                         ),                 
+// 	     .dret_insn_o                    ( dret_insn_o_tmp[k]                         ),                 
 
-	     .mret_dec_o                     ( mret_dec_o_tmp[k]                          ),                 
-	     .uret_dec_o                     ( uret_dec_o_tmp[k]                          ),                 
-	     .dret_dec_o                     ( dret_dec_o_tmp[k]                          ),                 
+// 	     .mret_dec_o                     ( mret_dec_o_tmp[k]                          ),                 
+// 	     .uret_dec_o                     ( uret_dec_o_tmp[k]                          ),                 
+// 	     .dret_dec_o                     ( dret_dec_o_tmp[k]                          ),                 
 
-	     .ecall_insn_o                   ( ecall_insn_o_tmp[k]                        ),               
-	     .wfi_o                          ( wfi_o_tmp[k]                               ),                      
+// 	     .ecall_insn_o                   ( ecall_insn_o_tmp[k]                        ),               
+// 	     .wfi_o                          ( wfi_o_tmp[k]                               ),                      
 
-	     .fencei_insn_o                  ( fencei_insn_o_tmp[k]                       ),           
+// 	     .fencei_insn_o                  ( fencei_insn_o_tmp[k]                       ),           
 
-	     .rega_used_o                    ( rega_used_o_tmp[k]                         ),                 
-	     .regb_used_o                    ( regb_used_o_tmp[k]                         ),                 
-	     .regc_used_o                    ( regc_used_o_tmp[k]                         ),                 
+// 	     .rega_used_o                    ( rega_used_o_tmp[k]                         ),                 
+// 	     .regb_used_o                    ( regb_used_o_tmp[k]                         ),                 
+// 	     .regc_used_o                    ( regc_used_o_tmp[k]                         ),                 
 
-	     .reg_fp_a_o                     ( reg_fp_a_o_tmp[k]                          ),                  
-	     .reg_fp_b_o                     ( reg_fp_b_o_tmp[k]                          ),                  
-	     .reg_fp_c_o                     ( reg_fp_c_o_tmp[k]                          ),                  
-	     .reg_fp_d_o                     ( reg_fp_d_o_tmp[k]                          ),                  
+// 	     .reg_fp_a_o                     ( reg_fp_a_o_tmp[k]                          ),                  
+// 	     .reg_fp_b_o                     ( reg_fp_b_o_tmp[k]                          ),                  
+// 	     .reg_fp_c_o                     ( reg_fp_c_o_tmp[k]                          ),                  
+// 	     .reg_fp_d_o                     ( reg_fp_d_o_tmp[k]                          ),                  
 
-	     .bmask_a_mux_o                  ( bmask_a_mux_o_tmp[k]                       ),              
-	     .bmask_b_mux_o                  ( bmask_b_mux_o_tmp[k]                       ),               
-	     .alu_bmask_a_mux_sel_o          ( alu_bmask_a_mux_sel_o_tmp[k]               ),       
-	     .alu_bmask_b_mux_sel_o          ( alu_bmask_b_mux_sel_o_tmp[k]               ),       
+// 	     .bmask_a_mux_o                  ( bmask_a_mux_o_tmp[k]                       ),              
+// 	     .bmask_b_mux_o                  ( bmask_b_mux_o_tmp[k]                       ),               
+// 	     .alu_bmask_a_mux_sel_o          ( alu_bmask_a_mux_sel_o_tmp[k]               ),       
+// 	     .alu_bmask_b_mux_sel_o          ( alu_bmask_b_mux_sel_o_tmp[k]               ),       
 
-	     .instr_rdata_i                  ( instr_rdata_i                              ),           
-	     .illegal_c_insn_i               ( illegal_c_insn_i                           ),       
+// 	     .instr_rdata_i                  ( instr_rdata_i                              ),           
+// 	     .illegal_c_insn_i               ( illegal_c_insn_i                           ),       
 
-	     .alu_en_o                       ( alu_en_o_tmp[k]                            ),                    
-	     .alu_operator_o 			           ( alu_operator_o_tmp[k]                      ),     			
-	     .alu_op_a_mux_sel_o             ( alu_op_a_mux_sel_o_tmp[k]                  ),          
-	     .alu_op_b_mux_sel_o             ( alu_op_b_mux_sel_o_tmp[k]                  ),          
-	     .alu_op_c_mux_sel_o             ( alu_op_c_mux_sel_o_tmp[k]                  ),          
-	     .alu_vec_o                      ( alu_vec_o_tmp[k]                           ),                  
-	     .alu_vec_mode_o                 ( alu_vec_mode_o_tmp[k]                      ),              
-	     .scalar_replication_o           ( scalar_replication_o_tmp[k]                ),        
-	     .scalar_replication_c_o         ( scalar_replication_c_o_tmp[k]              ),      
-	     .imm_a_mux_sel_o                ( imm_a_mux_sel_o_tmp[k]                     ),             
-	     .imm_b_mux_sel_o                ( imm_b_mux_sel_o_tmp[k]                     ),             
-	     .regc_mux_o                     ( regc_mux_o_tmp[k]                          ),                  
-	     .is_clpx_o                      ( is_clpx_o_tmp[k]                           ),                   
-	     .is_subrot_o                    ( is_subrot_o_tmp[k]                         ),    
+// 	     .alu_en_o                       ( alu_en_o_tmp[k]                            ),                    
+// 	     .alu_operator_o 			           ( alu_operator_o_tmp[k]                      ),     			
+// 	     .alu_op_a_mux_sel_o             ( alu_op_a_mux_sel_o_tmp[k]                  ),          
+// 	     .alu_op_b_mux_sel_o             ( alu_op_b_mux_sel_o_tmp[k]                  ),          
+// 	     .alu_op_c_mux_sel_o             ( alu_op_c_mux_sel_o_tmp[k]                  ),          
+// 	     .alu_vec_o                      ( alu_vec_o_tmp[k]                           ),                  
+// 	     .alu_vec_mode_o                 ( alu_vec_mode_o_tmp[k]                      ),              
+// 	     .scalar_replication_o           ( scalar_replication_o_tmp[k]                ),        
+// 	     .scalar_replication_c_o         ( scalar_replication_c_o_tmp[k]              ),      
+// 	     .imm_a_mux_sel_o                ( imm_a_mux_sel_o_tmp[k]                     ),             
+// 	     .imm_b_mux_sel_o                ( imm_b_mux_sel_o_tmp[k]                     ),             
+// 	     .regc_mux_o                     ( regc_mux_o_tmp[k]                          ),                  
+// 	     .is_clpx_o                      ( is_clpx_o_tmp[k]                           ),                   
+// 	     .is_subrot_o                    ( is_subrot_o_tmp[k]                         ),    
 
-	     .mult_operator_o                ( mult_operator_o_tmp[k]                     ),             
-	     .mult_int_en_o                  ( mult_int_en_o_tmp[k]                       ),               
-	     .mult_dot_en_o                  ( mult_dot_en_o_tmp[k]                       ),               
-	     .mult_imm_mux_o                 ( mult_imm_mux_o_tmp[k]                      ),             
-	     .mult_sel_subword_o             ( mult_sel_subword_o_tmp[k]                  ),          
-	     .mult_signed_mode_o             ( mult_signed_mode_o_tmp[k]                  ),          
-	     .mult_dot_signed_o              ( mult_dot_signed_o_tmp[k]                   ),          
+// 	     .mult_operator_o                ( mult_operator_o_tmp[k]                     ),             
+// 	     .mult_int_en_o                  ( mult_int_en_o_tmp[k]                       ),               
+// 	     .mult_dot_en_o                  ( mult_dot_en_o_tmp[k]                       ),               
+// 	     .mult_imm_mux_o                 ( mult_imm_mux_o_tmp[k]                      ),             
+// 	     .mult_sel_subword_o             ( mult_sel_subword_o_tmp[k]                  ),          
+// 	     .mult_signed_mode_o             ( mult_signed_mode_o_tmp[k]                  ),          
+// 	     .mult_dot_signed_o              ( mult_dot_signed_o_tmp[k]                   ),          
 
-	     .fs_off_i                       ( fs_off_i                                   ),
-	     .frm_i                          ( frm_i                                      ),
+// 	     .fs_off_i                       ( fs_off_i                                   ),
+// 	     .frm_i                          ( frm_i                                      ),
 
-	     .fpu_dst_fmt_o                  ( fpu_dst_fmt_o_tmp[k]                       ),      
-	     .fpu_src_fmt_o                  ( fpu_src_fmt_o_tmp[k]                       ),      
-	     .fpu_int_fmt_o                  ( fpu_int_fmt_o_tmp[k]                       ),     
+// 	     .fpu_dst_fmt_o                  ( fpu_dst_fmt_o_tmp[k]                       ),      
+// 	     .fpu_src_fmt_o                  ( fpu_src_fmt_o_tmp[k]                       ),      
+// 	     .fpu_int_fmt_o                  ( fpu_int_fmt_o_tmp[k]                       ),     
 
-	     .apu_en_o                       ( apu_en_o_tmp[k]                            ),    
-	     .apu_op_o                       ( apu_op_o_tmp[k]                            ),    
-	     .apu_lat_o                      ( apu_lat_o_tmp[k]                           ),    
-	     .fp_rnd_mode_o                  ( fp_rnd_mode_o_tmp[k]                       ),    
+// 	     .apu_en_o                       ( apu_en_o_tmp[k]                            ),    
+// 	     .apu_op_o                       ( apu_op_o_tmp[k]                            ),    
+// 	     .apu_lat_o                      ( apu_lat_o_tmp[k]                           ),    
+// 	     .fp_rnd_mode_o                  ( fp_rnd_mode_o_tmp[k]                       ),    
 
-	     .regfile_mem_we_o               ( regfile_mem_we_o_tmp[k]                    ),           
-	     .regfile_alu_we_o               ( regfile_alu_we_o_tmp[k]                    ),           
-	     .regfile_alu_we_dec_o           ( regfile_alu_we_dec_o_tmp[k]                ),       
-	     .regfile_alu_waddr_sel_o        ( regfile_alu_waddr_sel_o_tmp[k]             ),    
+// 	     .regfile_mem_we_o               ( regfile_mem_we_o_tmp[k]                    ),           
+// 	     .regfile_alu_we_o               ( regfile_alu_we_o_tmp[k]                    ),           
+// 	     .regfile_alu_we_dec_o           ( regfile_alu_we_dec_o_tmp[k]                ),       
+// 	     .regfile_alu_waddr_sel_o        ( regfile_alu_waddr_sel_o_tmp[k]             ),    
 
-	     .csr_access_o                   ( csr_access_o_tmp[k]                        ),               
-	     .csr_status_o                   ( csr_status_o_tmp[k]                        ),               
-	     .csr_op_o                       ( csr_op_o_tmp[k]                            ),                  
-	     .current_priv_lvl_i             ( current_priv_lvl_i                         ),       
+// 	     .csr_access_o                   ( csr_access_o_tmp[k]                        ),               
+// 	     .csr_status_o                   ( csr_status_o_tmp[k]                        ),               
+// 	     .csr_op_o                       ( csr_op_o_tmp[k]                            ),                  
+// 	     .current_priv_lvl_i             ( current_priv_lvl_i                         ),       
 
-	     .data_req_o                     ( data_req_o_tmp[k]                          ),                  
-	     .data_we_o                      ( data_we_o_tmp[k]                           ),                   
-	     .prepost_useincr_o              ( prepost_useincr_o_tmp[k]                   ),           
-	     .data_type_o                    ( data_type_o_tmp[k]                         ),                
-	     .data_sign_extension_o          ( data_sign_extension_o_tmp[k]               ),      
-	     .data_reg_offset_o              ( data_reg_offset_o_tmp[k]                   ),           
-	     .data_load_event_o              ( data_load_event_o_tmp[k]                   ),          
+// 	     .data_req_o                     ( data_req_o_tmp[k]                          ),                  
+// 	     .data_we_o                      ( data_we_o_tmp[k]                           ),                   
+// 	     .prepost_useincr_o              ( prepost_useincr_o_tmp[k]                   ),           
+// 	     .data_type_o                    ( data_type_o_tmp[k]                         ),                
+// 	     .data_sign_extension_o          ( data_sign_extension_o_tmp[k]               ),      
+// 	     .data_reg_offset_o              ( data_reg_offset_o_tmp[k]                   ),           
+// 	     .data_load_event_o              ( data_load_event_o_tmp[k]                   ),          
 
-	     .atop_o                         ( atop_o_tmp[k]                              ),    
+// 	     .atop_o                         ( atop_o_tmp[k]                              ),    
 
-	     .hwlp_we_o                      ( hwlp_we_o_tmp[k]                           ),                   
-	     .hwlp_target_mux_sel_o          ( hwlp_target_mux_sel_o_tmp[k]               ),      
-	     .hwlp_start_mux_sel_o           ( hwlp_start_mux_sel_o_tmp[k]                ),       
-	     .hwlp_cnt_mux_sel_o             ( hwlp_cnt_mux_sel_o_tmp[k]                  ),         
+// 	     .hwlp_we_o                      ( hwlp_we_o_tmp[k]                           ),                   
+// 	     .hwlp_target_mux_sel_o          ( hwlp_target_mux_sel_o_tmp[k]               ),      
+// 	     .hwlp_start_mux_sel_o           ( hwlp_start_mux_sel_o_tmp[k]                ),       
+// 	     .hwlp_cnt_mux_sel_o             ( hwlp_cnt_mux_sel_o_tmp[k]                  ),         
 
-	     .debug_mode_i                   ( debug_mode_i                               ),           
-	     .debug_wfi_no_sleep_i           ( debug_wfi_no_sleep_i                       ), 
+// 	     .debug_mode_i                   ( debug_mode_i                               ),           
+// 	     .debug_wfi_no_sleep_i           ( debug_wfi_no_sleep_i                       ), 
 										   
-	     .ctrl_transfer_insn_in_dec_o    ( ctrl_transfer_insn_in_dec_o_tmp[k]         ),        
-	     .ctrl_transfer_insn_in_id_o     ( ctrl_transfer_insn_in_id_o_tmp[k]          ),         
-	     .ctrl_transfer_target_mux_sel_o ( ctrl_transfer_target_mux_sel_o_tmp[k]      ),    
+// 	     .ctrl_transfer_insn_in_dec_o    ( ctrl_transfer_insn_in_dec_o_tmp[k]         ),        
+// 	     .ctrl_transfer_insn_in_id_o     ( ctrl_transfer_insn_in_id_o_tmp[k]          ),         
+// 	     .ctrl_transfer_target_mux_sel_o ( ctrl_transfer_target_mux_sel_o_tmp[k]      ),    
 										   
-	     .mcounteren_i                   ( mcounteren_i )
-	    );
+// 	     .mcounteren_i                   ( mcounteren_i )
+// 	    );
 	
 
-	end
-  endgenerate; 
+// 	end
+//   endgenerate; 
   
+	cv32e40p_decoder #(
+	 .COREV_PULP       (COREV_PULP      ),             
+	 .COREV_CLUSTER    (COREV_CLUSTER   ),             
+	 .A_EXTENSION      (A_EXTENSION     ),
+	 .FPU              (FPU             ),
+	 .FPU_ADDMUL_LAT   (FPU_ADDMUL_LAT  ),
+	 .FPU_OTHERS_LAT   (FPU_OTHERS_LAT  ),
+	 .ZFINX            (ZFINX           ),
+	 .PULP_SECURE      (PULP_SECURE     ),
+	 .USE_PMP          (USE_PMP         ),
+	 .APU_WOP_CPU      (APU_WOP_CPU     ),
+	 .DEBUG_TRIGGER_EN (DEBUG_TRIGGER_EN)
+	) 
+	cv32e40p_decoder_0 
+	(
+	 .deassert_we_i                  ( deassert_we_i ),         
+									   
+	 .illegal_insn_o                 ( illegal_insn_o_tmp[0]                      ),         
+	 .ebrk_insn_o                    ( ebrk_insn_o_tmp[0]                         ),             
+
+	 .mret_insn_o                    ( mret_insn_o_tmp[0]                         ),                 
+	 .uret_insn_o                    ( uret_insn_o_tmp[0]                         ),                 
+	 .dret_insn_o                    ( dret_insn_o_tmp[0]                         ),                 
+
+	 .mret_dec_o                     ( mret_dec_o_tmp[0]                          ),                 
+	 .uret_dec_o                     ( uret_dec_o_tmp[0]                          ),                 
+	 .dret_dec_o                     ( dret_dec_o_tmp[0]                          ),                 
+
+	 .ecall_insn_o                   ( ecall_insn_o_tmp[0]                        ),               
+	 .wfi_o                          ( wfi_o_tmp[0]                               ),                      
+
+	 .fencei_insn_o                  ( fencei_insn_o_tmp[0]                       ),           
+
+	 .rega_used_o                    ( rega_used_o_tmp[0]                         ),                 
+	 .regb_used_o                    ( regb_used_o_tmp[0]                         ),                 
+	 .regc_used_o                    ( regc_used_o_tmp[0]                         ),                 
+
+	 .reg_fp_a_o                     ( reg_fp_a_o_tmp[0]                          ),                  
+	 .reg_fp_b_o                     ( reg_fp_b_o_tmp[0]                          ),                  
+	 .reg_fp_c_o                     ( reg_fp_c_o_tmp[0]                          ),                  
+	 .reg_fp_d_o                     ( reg_fp_d_o_tmp[0]                          ),                  
+
+	 .bmask_a_mux_o                  ( bmask_a_mux_o_tmp[0]                       ),              
+	 .bmask_b_mux_o                  ( bmask_b_mux_o_tmp[0]                       ),               
+	 .alu_bmask_a_mux_sel_o          ( alu_bmask_a_mux_sel_o_tmp[0]               ),       
+	 .alu_bmask_b_mux_sel_o          ( alu_bmask_b_mux_sel_o_tmp[0]               ),       
+
+	 .instr_rdata_i                  ( instr_rdata_i                              ),           
+	 .illegal_c_insn_i               ( illegal_c_insn_i                           ),       
+
+	 .alu_en_o                       ( alu_en_o_tmp[0]                            ),                    
+	 .alu_operator_o 			     ( alu_operator_o_tmp[0]                      ),     			
+	 .alu_op_a_mux_sel_o             ( alu_op_a_mux_sel_o_tmp[0]                  ),          
+	 .alu_op_b_mux_sel_o             ( alu_op_b_mux_sel_o_tmp[0]                  ),          
+	 .alu_op_c_mux_sel_o             ( alu_op_c_mux_sel_o_tmp[0]                  ),          
+	 .alu_vec_o                      ( alu_vec_o_tmp[0]                           ),                  
+	 .alu_vec_mode_o                 ( alu_vec_mode_o_tmp[0]                      ),              
+	 .scalar_replication_o           ( scalar_replication_o_tmp[0]                ),        
+	 .scalar_replication_c_o         ( scalar_replication_c_o_tmp[0]              ),      
+	 .imm_a_mux_sel_o                ( imm_a_mux_sel_o_tmp[0]                     ),             
+	 .imm_b_mux_sel_o                ( imm_b_mux_sel_o_tmp[0]                     ),             
+	 .regc_mux_o                     ( regc_mux_o_tmp[0]                          ),                  
+	 .is_clpx_o                      ( is_clpx_o_tmp[0]                           ),                   
+	 .is_subrot_o                    ( is_subrot_o_tmp[0]                         ),    
+
+	 .mult_operator_o                ( mult_operator_o_tmp[0]                     ),             
+	 .mult_int_en_o                  ( mult_int_en_o_tmp[0]                       ),               
+	 .mult_dot_en_o                  ( mult_dot_en_o_tmp[0]                       ),               
+	 .mult_imm_mux_o                 ( mult_imm_mux_o_tmp[0]                      ),             
+	 .mult_sel_subword_o             ( mult_sel_subword_o_tmp[0]                  ),          
+	 .mult_signed_mode_o             ( mult_signed_mode_o_tmp[0]                  ),          
+	 .mult_dot_signed_o              ( mult_dot_signed_o_tmp[0]                   ),          
+
+	 .fs_off_i                       ( fs_off_i                                   ),
+	 .frm_i                          ( frm_i                                      ),
+
+	 .fpu_dst_fmt_o                  ( fpu_dst_fmt_o_tmp[0]                       ),      
+	 .fpu_src_fmt_o                  ( fpu_src_fmt_o_tmp[0]                       ),      
+	 .fpu_int_fmt_o                  ( fpu_int_fmt_o_tmp[0]                       ),     
+
+	 .apu_en_o                       ( apu_en_o_tmp[0]                            ),    
+	 .apu_op_o                       ( apu_op_o_tmp[0]                            ),    
+	 .apu_lat_o                      ( apu_lat_o_tmp[0]                           ),    
+	 .fp_rnd_mode_o                  ( fp_rnd_mode_o_tmp[0]                       ),    
+
+	 .regfile_mem_we_o               ( regfile_mem_we_o_tmp[0]                    ),           
+	 .regfile_alu_we_o               ( regfile_alu_we_o_tmp[0]                    ),           
+	 .regfile_alu_we_dec_o           ( regfile_alu_we_dec_o_tmp[0]                ),       
+	 .regfile_alu_waddr_sel_o        ( regfile_alu_waddr_sel_o_tmp[0]             ),    
+
+	 .csr_access_o                   ( csr_access_o_tmp[0]                        ),               
+	 .csr_status_o                   ( csr_status_o_tmp[0]                        ),               
+	 .csr_op_o                       ( csr_op_o_tmp[0]                            ),                  
+	 .current_priv_lvl_i             ( current_priv_lvl_i                         ),       
+
+	 .data_req_o                     ( data_req_o_tmp[0]                          ),                  
+	 .data_we_o                      ( data_we_o_tmp[0]                           ),                   
+	 .prepost_useincr_o              ( prepost_useincr_o_tmp[0]                   ),           
+	 .data_type_o                    ( data_type_o_tmp[0]                         ),                
+	 .data_sign_extension_o          ( data_sign_extension_o_tmp[0]               ),      
+	 .data_reg_offset_o              ( data_reg_offset_o_tmp[0]                   ),           
+	 .data_load_event_o              ( data_load_event_o_tmp[0]                   ),          
+
+	 .atop_o                         ( atop_o_tmp[0]                              ),    
+
+	 .hwlp_we_o                      ( hwlp_we_o_tmp[0]                           ),                   
+	 .hwlp_target_mux_sel_o          ( hwlp_target_mux_sel_o_tmp[0]               ),      
+	 .hwlp_start_mux_sel_o           ( hwlp_start_mux_sel_o_tmp[0]                ),       
+	 .hwlp_cnt_mux_sel_o             ( hwlp_cnt_mux_sel_o_tmp[0]                  ),         
+
+	 .debug_mode_i                   ( debug_mode_i                               ),           
+	 .debug_wfi_no_sleep_i           ( debug_wfi_no_sleep_i                       ), 
+									   
+	 .ctrl_transfer_insn_in_dec_o    ( ctrl_transfer_insn_in_dec_o_tmp[0]         ),        
+	 .ctrl_transfer_insn_in_id_o     ( ctrl_transfer_insn_in_id_o_tmp[0]          ),         
+	 .ctrl_transfer_target_mux_sel_o ( ctrl_transfer_target_mux_sel_o_tmp[0]      ),    
+									   
+	 .mcounteren_i                   ( mcounteren_i )
+	);
+	
+	cv32e40p_decoder #(
+	 .COREV_PULP       (COREV_PULP      ),             
+	 .COREV_CLUSTER    (COREV_CLUSTER   ),             
+	 .A_EXTENSION      (A_EXTENSION     ),
+	 .FPU              (FPU             ),
+	 .FPU_ADDMUL_LAT   (FPU_ADDMUL_LAT  ),
+	 .FPU_OTHERS_LAT   (FPU_OTHERS_LAT  ),
+	 .ZFINX            (ZFINX           ),
+	 .PULP_SECURE      (PULP_SECURE     ),
+	 .USE_PMP          (USE_PMP         ),
+	 .APU_WOP_CPU      (APU_WOP_CPU     ),
+	 .DEBUG_TRIGGER_EN (DEBUG_TRIGGER_EN)
+	) 
+	cv32e40p_decoder_1  
+	(
+	 .deassert_we_i                  ( deassert_we_i ),         
+									   
+	 .illegal_insn_o                 ( illegal_insn_o_tmp[1]                      ),         
+	 .ebrk_insn_o                    ( ebrk_insn_o_tmp[1]                         ),             
+
+	 .mret_insn_o                    ( mret_insn_o_tmp[1]                         ),                 
+	 .uret_insn_o                    ( uret_insn_o_tmp[1]                         ),                 
+	 .dret_insn_o                    ( dret_insn_o_tmp[1]                         ),                 
+
+	 .mret_dec_o                     ( mret_dec_o_tmp[1]                          ),                 
+	 .uret_dec_o                     ( uret_dec_o_tmp[1]                          ),                 
+	 .dret_dec_o                     ( dret_dec_o_tmp[1]                          ),                 
+
+	 .ecall_insn_o                   ( ecall_insn_o_tmp[1]                        ),               
+	 .wfi_o                          ( wfi_o_tmp[1]                               ),                      
+
+	 .fencei_insn_o                  ( fencei_insn_o_tmp[1]                       ),           
+
+	 .rega_used_o                    ( rega_used_o_tmp[1]                         ),                 
+	 .regb_used_o                    ( regb_used_o_tmp[1]                         ),                 
+	 .regc_used_o                    ( regc_used_o_tmp[1]                         ),                 
+
+	 .reg_fp_a_o                     ( reg_fp_a_o_tmp[1]                          ),                  
+	 .reg_fp_b_o                     ( reg_fp_b_o_tmp[1]                          ),                  
+	 .reg_fp_c_o                     ( reg_fp_c_o_tmp[1]                          ),                  
+	 .reg_fp_d_o                     ( reg_fp_d_o_tmp[1]                          ),                  
+
+	 .bmask_a_mux_o                  ( bmask_a_mux_o_tmp[1]                       ),              
+	 .bmask_b_mux_o                  ( bmask_b_mux_o_tmp[1]                       ),               
+	 .alu_bmask_a_mux_sel_o          ( alu_bmask_a_mux_sel_o_tmp[1]               ),       
+	 .alu_bmask_b_mux_sel_o          ( alu_bmask_b_mux_sel_o_tmp[1]               ),       
+
+	 .instr_rdata_i                  ( instr_rdata_i                              ),           
+	 .illegal_c_insn_i               ( illegal_c_insn_i                           ),       
+
+	 .alu_en_o                       ( alu_en_o_tmp[1]                            ),                    
+	 .alu_operator_o 			     ( alu_operator_o_tmp[1]                      ),     			
+	 .alu_op_a_mux_sel_o             ( alu_op_a_mux_sel_o_tmp[1]                  ),          
+	 .alu_op_b_mux_sel_o             ( alu_op_b_mux_sel_o_tmp[1]                  ),          
+	 .alu_op_c_mux_sel_o             ( alu_op_c_mux_sel_o_tmp[1]                  ),          
+	 .alu_vec_o                      ( alu_vec_o_tmp[1]                           ),                  
+	 .alu_vec_mode_o                 ( alu_vec_mode_o_tmp[1]                      ),              
+	 .scalar_replication_o           ( scalar_replication_o_tmp[1]                ),        
+	 .scalar_replication_c_o         ( scalar_replication_c_o_tmp[1]              ),      
+	 .imm_a_mux_sel_o                ( imm_a_mux_sel_o_tmp[1]                     ),             
+	 .imm_b_mux_sel_o                ( imm_b_mux_sel_o_tmp[1]                     ),             
+	 .regc_mux_o                     ( regc_mux_o_tmp[1]                          ),                  
+	 .is_clpx_o                      ( is_clpx_o_tmp[1]                           ),                   
+	 .is_subrot_o                    ( is_subrot_o_tmp[1]                         ),    
+
+	 .mult_operator_o                ( mult_operator_o_tmp[1]                     ),             
+	 .mult_int_en_o                  ( mult_int_en_o_tmp[1]                       ),               
+	 .mult_dot_en_o                  ( mult_dot_en_o_tmp[1]                       ),               
+	 .mult_imm_mux_o                 ( mult_imm_mux_o_tmp[1]                      ),             
+	 .mult_sel_subword_o             ( mult_sel_subword_o_tmp[1]                  ),          
+	 .mult_signed_mode_o             ( mult_signed_mode_o_tmp[1]                  ),          
+	 .mult_dot_signed_o              ( mult_dot_signed_o_tmp[1]                   ),          
+
+	 .fs_off_i                       ( fs_off_i                                   ),
+	 .frm_i                          ( frm_i                                      ),
+
+	 .fpu_dst_fmt_o                  ( fpu_dst_fmt_o_tmp[1]                       ),      
+	 .fpu_src_fmt_o                  ( fpu_src_fmt_o_tmp[1]                       ),      
+	 .fpu_int_fmt_o                  ( fpu_int_fmt_o_tmp[1]                       ),     
+
+	 .apu_en_o                       ( apu_en_o_tmp[1]                            ),    
+	 .apu_op_o                       ( apu_op_o_tmp[1]                            ),    
+	 .apu_lat_o                      ( apu_lat_o_tmp[1]                           ),    
+	 .fp_rnd_mode_o                  ( fp_rnd_mode_o_tmp[1]                       ),    
+
+	 .regfile_mem_we_o               ( regfile_mem_we_o_tmp[1]                    ),           
+	 .regfile_alu_we_o               ( regfile_alu_we_o_tmp[1]                    ),           
+	 .regfile_alu_we_dec_o           ( regfile_alu_we_dec_o_tmp[1]                ),       
+	 .regfile_alu_waddr_sel_o        ( regfile_alu_waddr_sel_o_tmp[1]             ),    
+
+	 .csr_access_o                   ( csr_access_o_tmp[1]                        ),               
+	 .csr_status_o                   ( csr_status_o_tmp[1]                        ),               
+	 .csr_op_o                       ( csr_op_o_tmp[1]                            ),                  
+	 .current_priv_lvl_i             ( current_priv_lvl_i                         ),       
+
+	 .data_req_o                     ( data_req_o_tmp[1]                          ),                  
+	 .data_we_o                      ( data_we_o_tmp[1]                           ),                   
+	 .prepost_useincr_o              ( prepost_useincr_o_tmp[1]                   ),           
+	 .data_type_o                    ( data_type_o_tmp[1]                         ),                
+	 .data_sign_extension_o          ( data_sign_extension_o_tmp[1]               ),      
+	 .data_reg_offset_o              ( data_reg_offset_o_tmp[1]                   ),           
+	 .data_load_event_o              ( data_load_event_o_tmp[1]                   ),          
+
+	 .atop_o                         ( atop_o_tmp[1]                              ),    
+
+	 .hwlp_we_o                      ( hwlp_we_o_tmp[1]                           ),                   
+	 .hwlp_target_mux_sel_o          ( hwlp_target_mux_sel_o_tmp[1]               ),      
+	 .hwlp_start_mux_sel_o           ( hwlp_start_mux_sel_o_tmp[1]                ),       
+	 .hwlp_cnt_mux_sel_o             ( hwlp_cnt_mux_sel_o_tmp[1]                  ),         
+
+	 .debug_mode_i                   ( debug_mode_i                               ),           
+	 .debug_wfi_no_sleep_i           ( debug_wfi_no_sleep_i                       ), 
+									   
+	 .ctrl_transfer_insn_in_dec_o    ( ctrl_transfer_insn_in_dec_o_tmp[1]         ),        
+	 .ctrl_transfer_insn_in_id_o     ( ctrl_transfer_insn_in_id_o_tmp[1]          ),         
+	 .ctrl_transfer_target_mux_sel_o ( ctrl_transfer_target_mux_sel_o_tmp[1]      ),    
+									   
+	 .mcounteren_i                   ( mcounteren_i )
+	);
+
+
+	cv32e40p_decoder #(
+	 .COREV_PULP       (COREV_PULP      ),             
+	 .COREV_CLUSTER    (COREV_CLUSTER   ),             
+	 .A_EXTENSION      (A_EXTENSION     ),
+	 .FPU              (FPU             ),
+	 .FPU_ADDMUL_LAT   (FPU_ADDMUL_LAT  ),
+	 .FPU_OTHERS_LAT   (FPU_OTHERS_LAT  ),
+	 .ZFINX            (ZFINX           ),
+	 .PULP_SECURE      (PULP_SECURE     ),
+	 .USE_PMP          (USE_PMP         ),
+	 .APU_WOP_CPU      (APU_WOP_CPU     ),
+	 .DEBUG_TRIGGER_EN (DEBUG_TRIGGER_EN)
+	) 
+	cv32e40p_decoder_2  
+	(
+	 .deassert_we_i                  ( deassert_we_i ),         
+									   
+	 .illegal_insn_o               ( illegal_insn_o_tmp[2]                      ),         
+	 .ebrk_insn_o                    ( ebrk_insn_o_tmp[2]                         ),             
+
+	 .mret_insn_o                    ( mret_insn_o_tmp[2]                         ),                 
+	 .uret_insn_o                    ( uret_insn_o_tmp[2]                         ),                 
+	 .dret_insn_o                    ( dret_insn_o_tmp[2]                         ),                 
+
+	 .mret_dec_o                     ( mret_dec_o_tmp[2]                          ),                 
+	 .uret_dec_o                     ( uret_dec_o_tmp[2]                          ),                 
+	 .dret_dec_o                     ( dret_dec_o_tmp[2]                          ),                 
+
+	 .ecall_insn_o                   ( ecall_insn_o_tmp[2]                        ),               
+	 .wfi_o                          ( wfi_o_tmp[2]                               ),                      
+
+	 .fencei_insn_o                  ( fencei_insn_o_tmp[2]                       ),           
+
+	 .rega_used_o                    ( rega_used_o_tmp[2]                         ),                 
+	 .regb_used_o                    ( regb_used_o_tmp[2]                         ),                 
+	 .regc_used_o                    ( regc_used_o_tmp[2]                         ),                 
+
+	 .reg_fp_a_o                     ( reg_fp_a_o_tmp[2]                          ),                  
+	 .reg_fp_b_o                     ( reg_fp_b_o_tmp[2]                          ),                  
+	 .reg_fp_c_o                     ( reg_fp_c_o_tmp[2]                          ),                  
+	 .reg_fp_d_o                     ( reg_fp_d_o_tmp[2]                          ),                  
+
+	 .bmask_a_mux_o                  ( bmask_a_mux_o_tmp[2]                       ),              
+	 .bmask_b_mux_o                  ( bmask_b_mux_o_tmp[2]                       ),               
+	 .alu_bmask_a_mux_sel_o          ( alu_bmask_a_mux_sel_o_tmp[2]               ),       
+	 .alu_bmask_b_mux_sel_o          ( alu_bmask_b_mux_sel_o_tmp[2]               ),       
+
+	 .instr_rdata_i                  ( instr_rdata_i                              ),           
+	 .illegal_c_insn_i               ( illegal_c_insn_i                           ),       
+
+	 .alu_en_o                       ( alu_en_o_tmp[2]                            ),                    
+	 .alu_operator_o 			           ( alu_operator_o_tmp[2]                      ),     			
+	 .alu_op_a_mux_sel_o             ( alu_op_a_mux_sel_o_tmp[2]                  ),          
+	 .alu_op_b_mux_sel_o             ( alu_op_b_mux_sel_o_tmp[2]                  ),          
+	 .alu_op_c_mux_sel_o             ( alu_op_c_mux_sel_o_tmp[2]                  ),          
+	 .alu_vec_o                      ( alu_vec_o_tmp[2]                           ),                  
+	 .alu_vec_mode_o                 ( alu_vec_mode_o_tmp[2]                      ),              
+	 .scalar_replication_o           ( scalar_replication_o_tmp[2]                ),        
+	 .scalar_replication_c_o         ( scalar_replication_c_o_tmp[2]              ),      
+	 .imm_a_mux_sel_o                ( imm_a_mux_sel_o_tmp[2]                     ),             
+	 .imm_b_mux_sel_o                ( imm_b_mux_sel_o_tmp[2]                     ),             
+	 .regc_mux_o                     ( regc_mux_o_tmp[2]                          ),                  
+	 .is_clpx_o                      ( is_clpx_o_tmp[2]                           ),                   
+	 .is_subrot_o                    ( is_subrot_o_tmp[2]                         ),    
+
+	 .mult_operator_o                ( mult_operator_o_tmp[2]                     ),             
+	 .mult_int_en_o                  ( mult_int_en_o_tmp[2]                       ),               
+	 .mult_dot_en_o                  ( mult_dot_en_o_tmp[2]                       ),               
+	 .mult_imm_mux_o                 ( mult_imm_mux_o_tmp[2]                      ),             
+	 .mult_sel_subword_o             ( mult_sel_subword_o_tmp[2]                  ),          
+	 .mult_signed_mode_o             ( mult_signed_mode_o_tmp[2]                  ),          
+	 .mult_dot_signed_o              ( mult_dot_signed_o_tmp[2]                   ),          
+
+	 .fs_off_i                       ( fs_off_i                                   ),
+	 .frm_i                          ( frm_i                                      ),
+
+	 .fpu_dst_fmt_o                  ( fpu_dst_fmt_o_tmp[2]                       ),      
+	 .fpu_src_fmt_o                  ( fpu_src_fmt_o_tmp[2]                       ),      
+	 .fpu_int_fmt_o                  ( fpu_int_fmt_o_tmp[2]                       ),     
+
+	 .apu_en_o                       ( apu_en_o_tmp[2]                            ),    
+	 .apu_op_o                       ( apu_op_o_tmp[2]                            ),    
+	 .apu_lat_o                      ( apu_lat_o_tmp[2]                           ),    
+	 .fp_rnd_mode_o                  ( fp_rnd_mode_o_tmp[2]                       ),    
+
+	 .regfile_mem_we_o               ( regfile_mem_we_o_tmp[2]                    ),           
+	 .regfile_alu_we_o               ( regfile_alu_we_o_tmp[2]                    ),           
+	 .regfile_alu_we_dec_o           ( regfile_alu_we_dec_o_tmp[2]                ),       
+	 .regfile_alu_waddr_sel_o        ( regfile_alu_waddr_sel_o_tmp[2]             ),    
+
+	 .csr_access_o                   ( csr_access_o_tmp[2]                        ),               
+	 .csr_status_o                   ( csr_status_o_tmp[2]                        ),               
+	 .csr_op_o                       ( csr_op_o_tmp[2]                            ),                  
+	 .current_priv_lvl_i             ( current_priv_lvl_i                         ),       
+
+	 .data_req_o                     ( data_req_o_tmp[2]                          ),                  
+	 .data_we_o                      ( data_we_o_tmp[2]                           ),                   
+	 .prepost_useincr_o              ( prepost_useincr_o_tmp[2]                   ),           
+	 .data_type_o                    ( data_type_o_tmp[2]                         ),                
+	 .data_sign_extension_o          ( data_sign_extension_o_tmp[2]               ),      
+	 .data_reg_offset_o              ( data_reg_offset_o_tmp[2]                   ),           
+	 .data_load_event_o              ( data_load_event_o_tmp[2]                   ),          
+
+	 .atop_o                         ( atop_o_tmp[2]                              ),    
+
+	 .hwlp_we_o                      ( hwlp_we_o_tmp[2]                           ),                   
+	 .hwlp_target_mux_sel_o          ( hwlp_target_mux_sel_o_tmp[2]               ),      
+	 .hwlp_start_mux_sel_o           ( hwlp_start_mux_sel_o_tmp[2]                ),       
+	 .hwlp_cnt_mux_sel_o             ( hwlp_cnt_mux_sel_o_tmp[2]                  ),         
+
+	 .debug_mode_i                   ( debug_mode_i                               ),           
+	 .debug_wfi_no_sleep_i           ( debug_wfi_no_sleep_i                       ), 
+									   
+	 .ctrl_transfer_insn_in_dec_o    ( ctrl_transfer_insn_in_dec_o_tmp[2]         ),        
+	 .ctrl_transfer_insn_in_id_o     ( ctrl_transfer_insn_in_id_o_tmp[2]          ),         
+	 .ctrl_transfer_target_mux_sel_o ( ctrl_transfer_target_mux_sel_o_tmp[2]      ),    
+									   
+	 .mcounteren_i                   ( mcounteren_i )
+	);
+
+
 endmodule
 

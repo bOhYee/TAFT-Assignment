@@ -22,11 +22,12 @@ module cv32e40p_alu_ft
     output logic        comparison_result_o,
 
     output logic ready_o,
-    input  logic ex_ready_i,
-	output logic [2:0] error_detected_alu
+    input  logic ex_ready_i
+	//output logic [2:0] error_detected_alu
 );
 
 
+	logic [2:0] error_detected_alu;
 
 	// ALU signals
 	// logic [31:0] alu_result_tmp [3:0];
@@ -54,33 +55,97 @@ module cv32e40p_alu_ft
 	// logic [15:0] counter_alu_c;
 	// logic alu_faulted [2:0];
 
-	genvar i;
-		generate
-			// for (i=0; i < 4; i++) begin
-			 for (i=0; i < 3; i++) begin
-				cv32e40p_alu alu_i (
-				.clk        (clk),
-				.rst_n      (rst_n),
-				.enable_i   (enable_i),
-				.operator_i (operator_i),
-				.operand_a_i(operand_a_i),
-				.operand_b_i(operand_b_i),
-				.operand_c_i(operand_c_i),
-				.vector_mode_i(vector_mode_i),
-				.bmask_a_i    (bmask_a_i),
-				.bmask_b_i    (bmask_b_i),
-				.imm_vec_ext_i(imm_vec_ext_i),
-				.is_clpx_i   (is_clpx_i),
-				.is_subrot_i (is_subrot_i),
-				.clpx_shift_i(clpx_shift_i),
-				.result_o           (alu_result_tmp[i]),
-				.comparison_result_o(alu_cmp_result_tmp[i]),
-				.ready_o   (alu_ready_tmp[i]),
-				.ex_ready_i(ex_ready_i)
-				); 
-			end
-		endgenerate
-	
+	// genvar i;
+	// 	generate
+	// 		// for (i=0; i < 4; i++) begin
+	// 		 for (i=0; i < 3; i++) begin
+	// 			cv32e40p_alu alu_i (
+	// 			.clk        (clk),
+	// 			.rst_n      (rst_n),
+	// 			.enable_i   (enable_i),
+	// 			.operator_i (operator_i),
+	// 			.operand_a_i(operand_a_i),
+	// 			.operand_b_i(operand_b_i),
+	// 			.operand_c_i(operand_c_i),
+	// 			.vector_mode_i(vector_mode_i),
+	// 			.bmask_a_i    (bmask_a_i),
+	// 			.bmask_b_i    (bmask_b_i),
+	// 			.imm_vec_ext_i(imm_vec_ext_i),
+	// 			.is_clpx_i   (is_clpx_i),
+	// 			.is_subrot_i (is_subrot_i),
+	// 			.clpx_shift_i(clpx_shift_i),
+	// 			.result_o           (alu_result_tmp[i]),
+	// 			.comparison_result_o(alu_cmp_result_tmp[i]),
+	// 			.ready_o   (alu_ready_tmp[i]),
+	// 			.ex_ready_i(ex_ready_i)
+	// 			); 
+	// 		end
+	// 	endgenerate
+
+
+
+	cv32e40p_alu alu_i_0 (
+		.clk        (clk),
+		.rst_n      (rst_n),
+		.enable_i   (enable_i),
+		.operator_i (operator_i),
+		.operand_a_i(operand_a_i),
+		.operand_b_i(operand_b_i),
+		.operand_c_i(operand_c_i),
+		.vector_mode_i(vector_mode_i),
+		.bmask_a_i    (bmask_a_i),
+		.bmask_b_i    (bmask_b_i),
+		.imm_vec_ext_i(imm_vec_ext_i),
+		.is_clpx_i   (is_clpx_i),
+		.is_subrot_i (is_subrot_i),
+		.clpx_shift_i(clpx_shift_i),
+		.result_o           (alu_result_tmp[0]),
+		.comparison_result_o(alu_cmp_result_tmp[0]),
+		.ready_o   (alu_ready_tmp[0]),
+		.ex_ready_i(ex_ready_i)
+	); 
+
+	cv32e40p_alu alu_i_1 (
+		.clk        (clk),
+		.rst_n      (rst_n),
+		.enable_i   (enable_i),
+		.operator_i (operator_i),
+		.operand_a_i(operand_a_i),
+		.operand_b_i(operand_b_i),
+		.operand_c_i(operand_c_i),
+		.vector_mode_i(vector_mode_i),
+		.bmask_a_i    (bmask_a_i),
+		.bmask_b_i    (bmask_b_i),
+		.imm_vec_ext_i(imm_vec_ext_i),
+		.is_clpx_i   (is_clpx_i),
+		.is_subrot_i (is_subrot_i),
+		.clpx_shift_i(clpx_shift_i),
+		.result_o           (alu_result_tmp[1]),
+		.comparison_result_o(alu_cmp_result_tmp[1]),
+		.ready_o   (alu_ready_tmp[1]),
+		.ex_ready_i(ex_ready_i)
+	); 
+
+	cv32e40p_alu alu_i_2 (
+		.clk        (clk),
+		.rst_n      (rst_n),
+		.enable_i   (enable_i),
+		.operator_i (operator_i),
+		.operand_a_i(operand_a_i),
+		.operand_b_i(operand_b_i),
+		.operand_c_i(operand_c_i),
+		.vector_mode_i(vector_mode_i),
+		.bmask_a_i    (bmask_a_i),
+		.bmask_b_i    (bmask_b_i),
+		.imm_vec_ext_i(imm_vec_ext_i),
+		.is_clpx_i   (is_clpx_i),
+		.is_subrot_i (is_subrot_i),
+		.clpx_shift_i(clpx_shift_i),
+		.result_o           (alu_result_tmp[2]),
+		.comparison_result_o(alu_cmp_result_tmp[2]),
+		.ready_o   (alu_ready_tmp[2]),
+		.ex_ready_i(ex_ready_i)
+	); 							
 	
 
 	// always_comb begin
@@ -130,10 +195,10 @@ module cv32e40p_alu_ft
 		// .data2_i          	( input_voter_a[1] ),
 		// .data3_i          	( input_voter_a[2] ),
 		// .dataout_o          ( result_o ),
-  		.error_detected_input_a          (error_detected_input_a[0] ),
-  		.error_detected_input_b          (error_detected_input_b[0] ),
-  		.error_detected_input_c          (error_detected_input_c[0] ),
-		.error_detected					 (error_detected_alu[0])
+  		.error_detected_input_a          (/*error_detected_input_a[0]*/ ),
+  		.error_detected_input_b          (/*error_detected_input_b[0]*/ ),
+  		.error_detected_input_c          (/*error_detected_input_c[0]*/ )
+		// .error_detected					 (error_detected_alu[0])
 	);
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -147,10 +212,10 @@ module cv32e40p_alu_ft
 		// .data2_i          	( input_voter_b[1] ),
 		// .data3_i          	( input_voter_b[2] ),
 		// .dataout_o          ( comparison_result_o ),
-  		.error_detected_input_a          (error_detected_input_a[1] ),
-  		.error_detected_input_b          (error_detected_input_b[1] ),
-  		.error_detected_input_c          (error_detected_input_c[1] ),
-		.error_detected					 (error_detected_alu[1])
+  		.error_detected_input_a          (/*error_detected_input_a[1]*/ ),
+  		.error_detected_input_b          (/*error_detected_input_b[1]*/ ),
+  		.error_detected_input_c          (/*error_detected_input_c[1]*/ )
+		// .error_detected					 (error_detected_alu[1])
 	);	
 	
 	cv32e40p_voter  #(.NBIT( 1 ))
@@ -164,10 +229,10 @@ module cv32e40p_alu_ft
 		// .data2_i          	( input_voter_c[1] ),
 		// .data3_i          	( input_voter_c[2] ),
 		// .dataout_o          ( ready_o ),
-  		.error_detected_input_a          (error_detected_input_a[2]  ),
-  		.error_detected_input_b          (error_detected_input_b[2]  ),
-  		.error_detected_input_c          (error_detected_input_c[2]  ),
-		.error_detected					 (error_detected_alu[2])
+  		.error_detected_input_a          (/*error_detected_input_a[2]*/  ),
+  		.error_detected_input_b          (/*error_detected_input_b[2]*/  ),
+  		.error_detected_input_c          (/*error_detected_input_c[2]*/  )
+		// .error_detected					 (error_detected_alu[2])
 	);
 
 
@@ -180,7 +245,7 @@ module cv32e40p_alu_ft
 			// alu_faulted[1] = 1'b0;
 			// alu_faulted[2] = 1'b0;
 		// end
-		// else if (en_counter == 1) begin //trovare un modo per evitare di contare ogni cc ma ogni volta che cambia l'alu op per esempio
+		// else if (en_counter == 1) begin 
 			// if (error_detected_input_a[0] == 1 || error_detected_input_a[1] == 1 || error_detected_input_a[2] == 1) begin
 				// if (counter_alu_a < 16'b1) begin
 					// counter_alu_a = counter_alu_a + 1;
