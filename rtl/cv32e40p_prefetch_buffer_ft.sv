@@ -59,9 +59,9 @@ module cv32e40p_prefetch_buffer_ft #(
 
 logic           fetch_valid_o_tmp [2:0];
 logic [31:0]    fetch_rdata_o_tmp [2:0];
-logic           instr_req_o_tmp [2:0];
+logic [2:0]     instr_req_o_tmp;
 logic [31:0]    instr_addr_o_tmp [2:0];
-logic           busy_o_tmp [2:0];
+logic [2:0]     busy_o_tmp ;
 
 logic [4:0]     error_detected_input_a;
 logic [4:0]     error_detected_input_b;
