@@ -27,13 +27,17 @@ analyze -format sverilog -work work ${DESIGN_RTL_DIR}/include/cv32e40p_fpu_pkg.s
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/include/cv32e40p_pkg.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_if_stage.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_cs_registers.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_decoder.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_encoder.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_ff.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_load_store_unit.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_id_stage.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_aligner.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_aligner_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_voter.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_decoder.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_decoder_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_compressed_decoder.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_compressed_decoder_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_fifo.sv
@@ -41,14 +45,17 @@ analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_prefetch_buffer.s
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_prefetch_buffer_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_hwloop_regs.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_mult.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_mult_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_int_controller.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_ex_stage.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_alu_div.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_alu.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_alu_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_ff_one.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_popcnt.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_apu_disp.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_controller.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_controller_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_obi_interface.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_prefetch_controller.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_sleep_unit.sv
@@ -86,7 +93,7 @@ link
 uniquify
 check_design 
 
-source $ROOT_PATH/constraints/cv32e40p_core.sdc
+read_sdc $ROOT_PATH/constraints/cv32e40p_core.sdc
 
 set_operating_conditions $OPER_COND
 

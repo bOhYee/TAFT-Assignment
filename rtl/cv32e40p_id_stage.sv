@@ -252,7 +252,17 @@ module cv32e40p_id_stage
 
     input logic        perf_imiss_i,
     input logic [31:0] mcounteren_i
+	
+	//fault Signals
+	//output logic [71:0] fault_decoder_o,
+	//output logic [43:0] fault_controller_o,
+	//output logic [2:0]  fault_regfile_o
 );
+
+  logic [71:0] fault_decoder_o;
+  logic [43:0] fault_controller_o;
+  logic [2:0]  fault_regfile_o;
+
 
   // Source/Destination register instruction index
   localparam REG_S1_MSB = 19;
@@ -928,12 +938,12 @@ module cv32e40p_id_stage
   //                                                     //
   /////////////////////////////////////////////////////////
 
-  cv32e40p_register_file #(
+  cv32e40p_register_file_ft #(
       .ADDR_WIDTH(6),
       .DATA_WIDTH(32),
       .FPU       (FPU),
       .ZFINX     (ZFINX)
-  ) register_file_i (
+  ) register_file_i_ft (
       .clk  (clk),
       .rst_n(rst_n),
 
@@ -959,7 +969,10 @@ module cv32e40p_id_stage
       // Write port b
       .waddr_b_i(regfile_alu_waddr_fw_i),
       .wdata_b_i(regfile_alu_wdata_fw_i),
-      .we_b_i   (regfile_alu_we_fw_power_i)
+      .we_b_i   (regfile_alu_we_fw_power_i),
+	  
+	  //fault signal
+	  .fault_hamming_o(fault_regfile_o)
   );
 
 
@@ -972,7 +985,7 @@ module cv32e40p_id_stage
   //                                           //
   ///////////////////////////////////////////////
 
-  cv32e40p_decoder #(
+  cv32e40p_decoder_ft #(
       .COREV_PULP      (COREV_PULP),
       .COREV_CLUSTER   (COREV_CLUSTER),
       .A_EXTENSION     (A_EXTENSION),
@@ -1098,7 +1111,10 @@ module cv32e40p_id_stage
       .ctrl_transfer_target_mux_sel_o(ctrl_transfer_target_mux_sel),
 
       // HPM related control signals
-      .mcounteren_i(mcounteren_i)
+      .mcounteren_i(mcounteren_i),
+	  
+	  //fault signal
+	  .fault_voter_o(fault_decoder_o)
 
   );
 
@@ -1111,11 +1127,11 @@ module cv32e40p_id_stage
   //                                                                //
   ////////////////////////////////////////////////////////////////////
 
-  cv32e40p_controller #(
+  cv32e40p_controller_ft #(
       .COREV_CLUSTER(COREV_CLUSTER),
       .COREV_PULP   (COREV_PULP),
       .FPU          (FPU)
-  ) controller_i (
+  ) controller_i_ft (
       .clk          (clk),  // Gated clock
       .clk_ungated_i(clk_ungated_i),  // Ungated clock
       .rst_n        (rst_n),
@@ -1279,7 +1295,10 @@ module cv32e40p_id_stage
       .wb_ready_i(wb_ready_i),
 
       // Performance Counters
-      .perf_pipeline_stall_o(perf_pipeline_stall)
+      .perf_pipeline_stall_o(perf_pipeline_stall),
+	  
+	  //fault signal
+	    .fault_voter_o(fault_controller_o)
   );
 
 

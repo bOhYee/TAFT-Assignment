@@ -11,6 +11,8 @@
 // Wrapper for a RI5CY testbench, containing RI5CY, Memory and stdout peripheral
 // Contributor: Robert Balas <balasr@student.ethz.ch>
 
+//typedef logic [31:0] alu_result_type [2:0];
+
 module cv32e40p_tb_subsystem #(
     parameter INSTR_RDATA_WIDTH = 32,
     parameter RAM_ADDR_WIDTH = 20,
@@ -64,6 +66,12 @@ module cv32e40p_tb_subsystem #(
 
   logic                               core_sleep_o;
 
+    // FAULT SIGNALS
+    logic [71:0] fault_decoder_o;
+	logic [43:0] fault_controller_o;
+	logic [2:0]  fault_regfile_o;
+    logic [2:0] fault_alu_o;
+    logic [3:0] fault_mult_o;
 
 
 
@@ -117,6 +125,11 @@ module cv32e40p_tb_subsystem #(
 
       .fetch_enable_i(fetch_enable_i),
       .core_sleep_o  (core_sleep_o)
+      //.fault_decoder_o(fault_decoder_o),
+	  //.fault_controller_o(fault_controller_o),
+	  //.fault_regfile_o(fault_regfile_o),
+      //.fault_alu_o(fault_alu_o),
+      //.fault_mult_o(fault_mult_o)
   );
 
 

@@ -29,6 +29,8 @@
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 
+//typedef logic [31:0] alu_result_type [2:0];
+
 module cv32e40p_ex_stage
   import cv32e40p_pkg::*;
   import cv32e40p_apu_core_pkg::*;
@@ -162,7 +164,12 @@ module cv32e40p_ex_stage
     output logic ex_ready_o,  // EX stage ready for new data
     output logic ex_valid_o,  // EX stage gets new data
     input  logic wb_ready_i  // WB stage ready for new data
+    //output logic [2:0] fault_alu_o,
+    //output logic [3:0] fault_mult_o
 );
+
+  logic [2:0] fault_alu_o;
+  logic [3:0] fault_mult_o;
 
   logic [                31:0] alu_result;
   logic [                31:0] mult_result;
@@ -260,30 +267,28 @@ module cv32e40p_ex_stage
   //                        //
   ////////////////////////////
 
-  cv32e40p_alu alu_i (
-      .clk        (clk),
-      .rst_n      (rst_n),
-      .enable_i   (alu_en_i),
-      .operator_i (alu_operator_i),
-      .operand_a_i(alu_operand_a_i),
-      .operand_b_i(alu_operand_b_i),
-      .operand_c_i(alu_operand_c_i),
+  cv32e40p_alu_ft alu_i_ft (
+    .clk        (clk),
+    .rst_n      (rst_n),
+    .enable_i   (alu_en_i),
+    .operator_i (alu_operator_i),
+    .operand_a_i(alu_operand_a_i),
+    .operand_b_i(alu_operand_b_i),
+    .operand_c_i(alu_operand_c_i),
+    .vector_mode_i(alu_vec_mode_i),
+    .bmask_a_i    (bmask_a_i),
+    .bmask_b_i    (bmask_b_i),
+    .imm_vec_ext_i(imm_vec_ext_i),
+    .is_clpx_i   (alu_is_clpx_i),
+    .clpx_shift_i(alu_clpx_shift_i),
+    .is_subrot_i (alu_is_subrot_i),
+    .result_o           (alu_result),
+    .comparison_result_o(alu_cmp_result),
+    .ready_o   (alu_ready),
+    .ex_ready_i(ex_ready_o),
+    .error_detected_alu(fault_alu_o)
+  ); 
 
-      .vector_mode_i(alu_vec_mode_i),
-      .bmask_a_i    (bmask_a_i),
-      .bmask_b_i    (bmask_b_i),
-      .imm_vec_ext_i(imm_vec_ext_i),
-
-      .is_clpx_i   (alu_is_clpx_i),
-      .clpx_shift_i(alu_clpx_shift_i),
-      .is_subrot_i (alu_is_subrot_i),
-
-      .result_o           (alu_result),
-      .comparison_result_o(alu_cmp_result),
-
-      .ready_o   (alu_ready),
-      .ex_ready_i(ex_ready_o)
-  );
 
 
   ////////////////////////////////////////////////////////////////
@@ -295,7 +300,7 @@ module cv32e40p_ex_stage
   //                                                            //
   ////////////////////////////////////////////////////////////////
 
-  cv32e40p_mult mult_i (
+  cv32e40p_mult_ft mult_i_ft (
       .clk  (clk),
       .rst_n(rst_n),
 
@@ -323,8 +328,10 @@ module cv32e40p_ex_stage
       .multicycle_o (mult_multicycle_o),
       .mulh_active_o(mulh_active),
       .ready_o      (mult_ready),
-      .ex_ready_i   (ex_ready_o)
+      .ex_ready_i   (ex_ready_o),
+      .error_detected_mult (fault_mult_o)
   );
+
 
   generate
     if (FPU == 1) begin : gen_apu
