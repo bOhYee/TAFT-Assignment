@@ -1,10 +1,6 @@
 ###################################################################
 
-<<<<<<< HEAD
-# Created by write_sdc on Sat Dec 16 14:55:25 2023
-=======
-# Created by write_sdc on Sat Dec 16 16:10:53 2023
->>>>>>> refs/remotes/origin/main
+# Created by write_sdc on Fri Dec 29 14:48:29 2023
 
 ###################################################################
 set sdc_version 2.1

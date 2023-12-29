@@ -31,10 +31,14 @@ analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_register_file_ff.
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_load_store_unit.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_id_stage.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_aligner.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_aligner_ft.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_voter.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_decoder.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_compressed_decoder.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_compressed_decoder_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_fifo.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_prefetch_buffer.sv
+analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_prefetch_buffer_ft.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_hwloop_regs.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_mult.sv
 analyze -format sverilog -work work ${DESIGN_RTL_DIR}/cv32e40p_int_controller.sv
@@ -93,9 +97,14 @@ set uniquify_naming_style "%s_%d"
 uniquify -force
 
 #-gate_clock -no_boundary_optimization -timing
+#set_dont_touch core_i/pc_id
+set_dont_touch core_i/if_stage_i/prefetch_buffer_i/prefetch_buffer_i_0/instr_req_o
+set_dont_touch core_i/if_stage_i/prefetch_buffer_i/prefetch_buffer_i_1/instr_req_o
+set_dont_touch core_i/if_stage_i/prefetch_buffer_i/prefetch_buffer_i_2/instr_req_o
 compile_ultra -no_autoungroup 
 
 report_timing > ${LOG_PATH}/report_timing.log
+report_area -hierarchy > ${LOG_PATH}/report_area_hier.log
 change_names -hierarchy -rules verilog
 write -hierarchy -format verilog -output "${GATE_PATH}/${TOPLEVEL}.v"
 write -hierarchy -format ddc     -output "${GATE_PATH}/${TOPLEVEL}.ddc"
