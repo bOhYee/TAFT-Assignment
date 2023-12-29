@@ -38,7 +38,8 @@ module cv32e40p_voter
   output logic [NBIT-1:0]		dataout_o,
   output logic 					error_detected_input_a,
   output logic 					error_detected_input_b,
-  output logic 					error_detected_input_c
+  output logic 					error_detected_input_c,
+  output logic 					error_detected
 );
 
 //structural description of majority voter of 3
@@ -72,8 +73,12 @@ error_detected_input_c = 0;
 	else begin
 		// IF ALL THE OUTPUTS ARE DIFFERENT, data1_i IS SENT TO THE OUTPUT
 		dataout_o = data1_i; 
+		error_detected_input_a = 1;
+		error_detected_input_b = 1;
+		error_detected_input_c = 1;
 	end
 end
 
+	assign error_detected = error_detected_input_a || error_detected_input_b || error_detected_input_c;
 
 endmodule

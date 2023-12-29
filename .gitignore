@@ -2,7 +2,10 @@
 run/*
 
 # Ignore synthesis directory
-#syn/*
+syn/out/*
+syn/run/*
+syn/techlib/*
+
 
 # Ignore all backup directories and files
 bak/
