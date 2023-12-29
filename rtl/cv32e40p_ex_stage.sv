@@ -168,6 +168,9 @@ module cv32e40p_ex_stage
     //output logic [3:0] fault_mult_o
 );
 
+  logic [2:0] fault_alu_o;
+  logic [3:0] fault_mult_o;
+
   logic [                31:0] alu_result;
   logic [                31:0] mult_result;
   logic                        alu_cmp_result;
@@ -282,8 +285,8 @@ module cv32e40p_ex_stage
     .result_o           (alu_result),
     .comparison_result_o(alu_cmp_result),
     .ready_o   (alu_ready),
-    .ex_ready_i(ex_ready_o)
-    //.error_detected_alu(fault_alu_o)
+    .ex_ready_i(ex_ready_o),
+    .error_detected_alu(fault_alu_o)
   ); 
 
 
@@ -325,8 +328,8 @@ module cv32e40p_ex_stage
       .multicycle_o (mult_multicycle_o),
       .mulh_active_o(mulh_active),
       .ready_o      (mult_ready),
-      .ex_ready_i   (ex_ready_o)
-      //.error_detected_mult (fault_mult_o)
+      .ex_ready_i   (ex_ready_o),
+      .error_detected_mult (fault_mult_o)
   );
 
 

@@ -194,13 +194,13 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   input  logic        wb_ready_i,                 // WB stage is ready
 
   // Performance Counters
-  output logic        perf_pipeline_stall_o       // stall due to cv.elw extra cycles
+  output logic        perf_pipeline_stall_o,       // stall due to cv.elw extra cycles
   
    // fault signal
-  //output logic [43:0]      fault_voter_o				// signal to report mismatches in voter's input
+  output logic [43:0]      fault_voter_o				// signal to report mismatches in voter's input
 );
 
-  logic [43:0]      fault_voter_o;
+  //logic [43:0]      fault_voter_o;
 
   logic [2:0]       ctrl_busy_o_tmp;               // Core is busy processing instructions
   logic [2:0]       is_decoding_o_tmp;             // Core is in decoding state
@@ -289,8 +289,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( ctrl_busy_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[0] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[0] )
 	);	
 
   // Core is in decoding state
@@ -305,8 +305,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( is_decoding_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[1] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[1] )
   );
   
     /////////////////////////////////////////////////////////////////////////
@@ -325,8 +325,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( deassert_we_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[2] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[2] )
   );
 
   // prevent writes on the hwloop instructions in cas
@@ -341,8 +341,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( hwlp_mask_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[3] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[3] )
   );
   
     /////////////////////////////////////////////////////////////////////////
@@ -361,8 +361,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( instr_req_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[4] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[4] )
   );
   
     /////////////////////////////////////////////////////////////////////////
@@ -381,8 +381,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( pc_set_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[5] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[5] )
   );
   
   // Selector in the Fetch stage to select the right PC (normal, jump ...)
@@ -397,8 +397,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( pc_mux_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[6] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[6] )
   );
   
   // Selects target PC for exception
@@ -413,8 +413,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( exc_pc_mux_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[7] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[7] )
   );
   
   // Selects trap address base
@@ -429,8 +429,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( trap_addr_mux_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[8] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[8] )
   );
     
     /////////////////////////////////////////////////////////////////////////
@@ -448,8 +448,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( hwlp_dec_cnt_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[9] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[9] )
   );
   
   cv32e40p_voter #(
@@ -463,8 +463,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( hwlp_jump_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[10] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[10] )
   );
   
   cv32e40p_voter #(
@@ -478,8 +478,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( hwlp_targ_addr_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[11] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[11] )
   );
   
     /////////////////////////////////////////////////////////////////////////
@@ -497,8 +497,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( data_err_ack_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[12] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[12] )
   ); 
   
     /////////////////////////////////////////////////////////////////////////
@@ -516,8 +516,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( apu_stall_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[13] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[13] )
   ); 
   
     /////////////////////////////////////////////////////////////////////////
@@ -535,8 +535,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( irq_ack_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[14] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[14] )
   ); 
   
   cv32e40p_voter #(
@@ -550,8 +550,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( irq_id_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[15] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[15] )
   ); 
   
   cv32e40p_voter #(
@@ -565,8 +565,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( exc_cause_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[16] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[16] )
   );
   
     /////////////////////////////////////////////////////////////////////////
@@ -584,8 +584,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( debug_mode_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[17] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[17] )
   );
   
   cv32e40p_voter #(
@@ -599,8 +599,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( debug_cause_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[18] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[18] )
   );
   
   cv32e40p_voter #(
@@ -614,8 +614,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( debug_csr_save_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[19] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[19] )
   );
   
   cv32e40p_voter #(
@@ -629,8 +629,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( debug_p_elw_no_sleep_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[20] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[20] )
   );
   
   cv32e40p_voter #(
@@ -644,8 +644,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( debug_wfi_no_sleep_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[21] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[21] )
   );
   
   cv32e40p_voter #(
@@ -659,8 +659,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( debug_havereset_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[22] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[22] )
   );
   
   cv32e40p_voter #(
@@ -674,8 +674,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( debug_running_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[23] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[23] )
   );
   
   cv32e40p_voter #(
@@ -689,8 +689,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( debug_halted_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[24] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[24] )
   );
   
     /////////////////////////////////////////////////////////////////////////
@@ -708,8 +708,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( wake_from_sleep_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[25] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[25] )
   );
   
   cv32e40p_voter #(
@@ -723,8 +723,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( csr_save_if_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[26] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[26] )
   );
   
   cv32e40p_voter #(
@@ -738,8 +738,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( csr_save_id_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[27] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[27] )
   );
   
   cv32e40p_voter #(
@@ -753,8 +753,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( csr_save_ex_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[28] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[28] )
   );
   
   cv32e40p_voter #(
@@ -768,8 +768,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( csr_cause_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[29] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[29] )
   );
   
   cv32e40p_voter #(
@@ -783,8 +783,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( csr_irq_sec_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[30] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[30] )
   );
   
   cv32e40p_voter #(
@@ -798,8 +798,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( csr_restore_mret_id_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[31] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[31] )
   );
   
   cv32e40p_voter #(
@@ -813,8 +813,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( csr_restore_uret_id_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[32] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[32] )
   );
   
   cv32e40p_voter #(
@@ -828,8 +828,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( csr_restore_dret_id_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[33] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[33] )
   );
   
   cv32e40p_voter #(
@@ -843,8 +843,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( csr_save_cause_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[34] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[34] )
   );
   
     /////////////////////////////////////////////////////////////////////////
@@ -863,8 +863,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( operand_a_fw_mux_sel_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[35] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[35] )
   );
   
   // regfile rb data selector form ID stage
@@ -879,8 +879,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( operand_b_fw_mux_sel_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[36] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[36] )
   );
   
   // regfile rc data selector form ID stage
@@ -895,8 +895,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( operand_c_fw_mux_sel_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[37] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[37] )
   );
   
     /////////////////////////////////////////////////////////////////////////
@@ -914,8 +914,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( halt_if_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[38] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[38] )
   );
   
   cv32e40p_voter #(
@@ -929,8 +929,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( halt_id_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[39] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[39] )
   );
   
   cv32e40p_voter #(
@@ -944,8 +944,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( misaligned_stall_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[40] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[40] )
   );
   
   cv32e40p_voter #(
@@ -959,8 +959,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( jr_stall_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[41] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[41] )
   );
   
   cv32e40p_voter #(
@@ -974,8 +974,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( load_stall_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[42] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[42] )
   );
   
     /////////////////////////////////////////////////////////////////////////
@@ -994,8 +994,8 @@ module cv32e40p_controller_ft import cv32e40p_pkg::*;
   	.dataout_o          ( perf_pipeline_stall_o ),
   	.error_detected_input_a          ( ),
   	.error_detected_input_b          ( ),
-  	.error_detected_input_c          ( )
-	// .error_detected				     ( fault_voter_o[43] )
+  	.error_detected_input_c          ( ),
+	.error_detected				     ( fault_voter_o[43] )
   );
   
     ///////////////////////////////////////////////////////////////////////////

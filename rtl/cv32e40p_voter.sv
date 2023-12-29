@@ -38,8 +38,8 @@ module cv32e40p_voter
   output logic [NBIT-1:0]		dataout_o,
   output logic 					error_detected_input_a,
   output logic 					error_detected_input_b,
-  output logic 					error_detected_input_c
-  //output logic 					error_detected
+  output logic 					error_detected_input_c,
+  output logic 					error_detected
 );
 
 //structural description of majority voter of 3
@@ -82,7 +82,7 @@ error_detected_input_c_tmp = 0;
 	end
 end
 
-	//assign error_detected = error_detected_input_a_tmp || error_detected_input_b_tmp || error_detected_input_c_tmp;
+	assign error_detected = error_detected_input_a_tmp || error_detected_input_b_tmp || error_detected_input_c_tmp;
 	assign error_detected_input_a = error_detected_input_a_tmp;
 	assign error_detected_input_b = error_detected_input_b_tmp;
 	assign error_detected_input_c = error_detected_input_c_tmp;

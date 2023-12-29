@@ -259,6 +259,11 @@ module cv32e40p_id_stage
 	//output logic [2:0]  fault_regfile_o
 );
 
+  logic [71:0] fault_decoder_o;
+  logic [43:0] fault_controller_o;
+  logic [2:0]  fault_regfile_o;
+
+
   // Source/Destination register instruction index
   localparam REG_S1_MSB = 19;
   localparam REG_S1_LSB = 15;
@@ -964,10 +969,10 @@ module cv32e40p_id_stage
       // Write port b
       .waddr_b_i(regfile_alu_waddr_fw_i),
       .wdata_b_i(regfile_alu_wdata_fw_i),
-      .we_b_i   (regfile_alu_we_fw_power_i)
+      .we_b_i   (regfile_alu_we_fw_power_i),
 	  
 	  //fault signal
-	  //.fault_hamming_o(fault_regfile_o)
+	  .fault_hamming_o(fault_regfile_o)
   );
 
 
@@ -1106,10 +1111,10 @@ module cv32e40p_id_stage
       .ctrl_transfer_target_mux_sel_o(ctrl_transfer_target_mux_sel),
 
       // HPM related control signals
-      .mcounteren_i(mcounteren_i)
+      .mcounteren_i(mcounteren_i),
 	  
 	  //fault signal
-	  //.fault_voter_o(fault_decoder_o)
+	  .fault_voter_o(fault_decoder_o)
 
   );
 
@@ -1290,10 +1295,10 @@ module cv32e40p_id_stage
       .wb_ready_i(wb_ready_i),
 
       // Performance Counters
-      .perf_pipeline_stall_o(perf_pipeline_stall)
+      .perf_pipeline_stall_o(perf_pipeline_stall),
 	  
 	  //fault signal
-	    //.fault_voter_o(fault_controller_o)
+	    .fault_voter_o(fault_controller_o)
   );
 
 
