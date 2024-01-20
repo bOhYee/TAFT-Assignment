@@ -10,12 +10,20 @@ module strobe;
 
 // Inject faults
 initial begin
-
+        
+        //force `TOPLEVEL.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U4.A1 = 0;
+        //force `TOPLEVEL.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U4.A2 = 0;
+        //force `TOPLEVEL.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U3.A = 0;
+        //force `TOPLEVEL.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U4.ZN = 1;
+        //force `TOPLEVEL.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U3.B1 = 1;
+        //force `TOPLEVEL.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U3.B2 = 1;
+        //force `TOPLEVEL.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U3.ZN = 1;
         $display("ZOIX INJECTION");
         //$fs_inject;       // by default
 
         $fs_delete;			// CHECK THIS
         $fs_add(`TOPLEVEL);		// CHECK THIS
+        
 
 end
 

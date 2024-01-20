@@ -23,6 +23,8 @@ test1:
 
     # You can write your code here 
 
+
+	
     li a0, 0xCAFECAFE    # return value
 
 

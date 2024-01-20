@@ -43,9 +43,9 @@ module tb_top #(
 
   // cycle counter
   int unsigned        cycle_cnt_q;
-
   // testbench result
   logic               tests_passed;
+
   logic               tests_failed;
   logic               exit_valid;
   logic        [31:0] exit_value;
@@ -167,6 +167,24 @@ module tb_top #(
     assert (INSTR_RDATA_WIDTH == 32)
     else $fatal("invalid INSTR_RDATA_WIDTH, choose 32");
   end
+`endif
+
+
+`ifdef GATE_LEVEL_TOP
+
+    initial begin   
+
+
+    //force wrapper_i.top_i.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U4.A1 = 0; //U4 A1 ND 0
+    //force wrapper_i.top_i.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U4.A2 = 0; //U4 A2 ND 0
+    //force wrapper_i.top_i.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U3.A = 0; //U3 A ND 0 
+    //force wrapper_i.top_i.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U4.ZN = 1; //U4 ZN ND 1
+    //force wrapper_i.top_i.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U3.B1 = 1; //U3 B1 ND 1
+    //force wrapper_i.top_i.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U3.B2 = 1; //U3 B2 ND 1
+    //force wrapper_i.top_i.core_i.ex_stage_i.alu_i_ft.voter_alu_comparison_result_o.U3.ZN = 1; //U3 ZN ND 1
+
+
+    end
 `endif
 
 endmodule  // tb_top

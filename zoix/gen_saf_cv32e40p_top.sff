@@ -10,11 +10,17 @@
 # Set fault generation constraints
 FaultGenerate
 {
-    #NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.alu_i_ft.alu_i_0.**" } 
-    #NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.alu_i_ft.alu_i_1.**" } 
-    #NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.alu_i_ft.alu_i_2.**" } 
+    NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.alu_i_ft.alu_i_0.**" } 
+    NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.alu_i_ft.alu_i_1.**" } 
+    NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.alu_i_ft.alu_i_2.**" } 
+
+    #NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.mult_i_ft.mult_i_0.**" } 
+    #NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.mult_i_ft.mult_i_1.**" } 
+    #NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.mult_i_ft.mult_i_2.**" } 
+
+
     #NA [0,1] { PORT "cv32e40p_top.core_i.ex_stage_i.**" } 
     #NA [0,1] { PORT "cv32e40p_top.core_i.**" } 
-    NA [0,1] { PORT "cv32e40p_top.**" }  
+    #NA [0,1] { PORT "cv32e40p_top.**" }  
     #NA [0,1] { PORT "cv32e40p_top.core_i.id_stage_i.register_file_i_ft.register_file_i.**" }  
 }
