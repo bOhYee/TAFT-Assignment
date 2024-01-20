@@ -36,19 +36,8 @@ initial begin
                 $fs_strobe(`TOPLEVEL.data_addr_o);
                 $fs_strobe(`TOPLEVEL.data_wdata_o);
                 $fs_strobe(`TOPLEVEL.data_be_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_0.result_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_0.result_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_0.result_o);
-                // $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.genblk1_3__alu_i.result_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_1.comparison_result_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_1.comparison_result_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_1.comparison_result_o);
-                // $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.genblk1_3__alu_i.comparison_result_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_2.ready_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_2.ready_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_2.ready_o);
-                // $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.genblk1_3__alu_i.ready_o);
 
+                // IF STAGE
                 // PREFETCH BUFFER IF STAGE
                 $fs_strobe(`TOPLEVEL.core_i.if_stage_i.prefetch_buffer_i.prefetch_buffer_i_0.fetch_valid_o);
                 $fs_strobe(`TOPLEVEL.core_i.if_stage_i.prefetch_buffer_i.prefetch_buffer_i_1.fetch_valid_o);
@@ -79,36 +68,25 @@ initial begin
                 $fs_strobe(`TOPLEVEL.core_i.if_stage_i.aligner_i.genblk1_0__compressed_aligner_i.pc_o);
                 $fs_strobe(`TOPLEVEL.core_i.if_stage_i.aligner_i.genblk1_1__compressed_aligner_i.pc_o);
                 $fs_strobe(`TOPLEVEL.core_i.if_stage_i.aligner_i.genblk1_2__compressed_aligner_i.pc_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_0__mult_i.result_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_0__mult_i.multicycle_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_0__mult_i.mulh_active_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_0__mult_i.ready_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_1__mult_i.result_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_1__mult_i.multicycle_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_1__mult_i.mulh_active_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_1__mult_i.ready_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_2__mult_i.result_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_2__mult_i.multicycle_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_2__mult_i.mulh_active_o);
-                //$fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.genblk1_2__mult_i.ready_o);
 
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_0.result_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_0.multicycle_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_0.mulh_active_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_0.ready_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_1.result_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_1.multicycle_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_1.mulh_active_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_1.ready_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_2.result_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_2.multicycle_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_2.mulh_active_o);
-                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_2.ready_o);
+                // COMPRESSED DECODER IF STAGE
+                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_0__compressed_decoder_i.instr_o);
+                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_1__compressed_decoder_i.instr_o);
+                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_2__compressed_decoder_i.instr_o);
+                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_0__compressed_decoder_i.is_compressed_o);
+                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_1__compressed_decoder_i.is_compressed_o);
+                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_2__compressed_decoder_i.is_compressed_o);
+                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_0__compressed_decoder_i.illegal_instr_o);
+                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_1__compressed_decoder_i.illegal_instr_o);
+                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_2__compressed_decoder_i.illegal_instr_o);
 
+                // ID STAGE
+                // REGISTER FILE
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.register_file_i_ft.register_file_i.rdata_a_o);
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.register_file_i_ft.register_file_i.rdata_b_o);
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.register_file_i_ft.register_file_i.rdata_c_o);
 
+                // DECODER
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.decoder_i.cv32e40p_decoder_0.illegal_insn_o          		       );
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.decoder_i.cv32e40p_decoder_0.ebrk_insn_o             		       );
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.decoder_i.cv32e40p_decoder_0.mret_insn_o             		       );
@@ -328,6 +306,7 @@ initial begin
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.decoder_i.cv32e40p_decoder_2.ctrl_transfer_insn_in_id_o             );
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.decoder_i.cv32e40p_decoder_2.ctrl_transfer_target_mux_sel_o         );
 
+                // CONTROLLER
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.controller_i_ft.cv32e40p_controller_0.ctrl_busy_o		 );                        
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.controller_i_ft.cv32e40p_controller_0.is_decoding_o               );
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.controller_i_ft.cv32e40p_controller_0.deassert_we_o               );
@@ -462,18 +441,33 @@ initial begin
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.controller_i_ft.cv32e40p_controller_2.jr_stall_o                  );
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.controller_i_ft.cv32e40p_controller_2.load_stall_o                );
                 $fs_strobe(`TOPLEVEL.core_i.id_stage_i.controller_i_ft.cv32e40p_controller_2.perf_pipeline_stall_o       );
-
-                // COMPRESSED DECODER IF STAGE
-                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_0__compressed_decoder_i.instr_o);
-                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_1__compressed_decoder_i.instr_o);
-                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_2__compressed_decoder_i.instr_o);
-                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_0__compressed_decoder_i.is_compressed_o);
-                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_1__compressed_decoder_i.is_compressed_o);
-                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_2__compressed_decoder_i.is_compressed_o);
-                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_0__compressed_decoder_i.illegal_instr_o);
-                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_1__compressed_decoder_i.illegal_instr_o);
-                $fs_strobe(`TOPLEVEL.core_i.if_stage_i.compressed_decoder_i.genblk1_2__compressed_decoder_i.illegal_instr_o);
                 
+
+                // EXE STAGE
+                // ALU
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_0.result_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_1.result_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_2.result_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_0.comparison_result_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_1.comparison_result_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_2.comparison_result_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_0.ready_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_1.ready_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.alu_i_ft.alu_i_2.ready_o);
+
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_0.result_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_1.result_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_2.result_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_0.multicycle_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_1.multicycle_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_2.multicycle_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_0.mulh_active_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_1.mulh_active_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_2.mulh_active_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_0.ready_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_1.ready_o);
+                $fs_strobe(`TOPLEVEL.core_i.ex_stage_i.mult_i_ft.mult_i_2.ready_o);
+
                 #10000; // TMAX Strobe period
         end
 
